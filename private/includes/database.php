@@ -13,7 +13,7 @@ class MySQLDatabase {
         $this->connection = mysqli_connect(DB_SERVER,DB_USER, DB_PASS, DB_NAME);
         if(mysqli_connect_errno()) {
             $_SESSION['message'] = "Cannot Confirm Query. Database query failed.";
-            redirect_to("404_error.php");
+            redirect_to(WEB_ROOT."/404_error.php");
             // or this way for debug
             die("Database connection failed: " .
                 mysqli_connect_error() . 
@@ -40,7 +40,7 @@ class MySQLDatabase {
     private function confirm_query($result) {
         if(!$result) {
             $_SESSION['message'] = "Cannot Confirm Query. Database query failed.";
-            redirect_to("404_error.php");
+            redirect_to(WEB_ROOT."/404_error.php");
         }
     }
       

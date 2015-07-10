@@ -1,6 +1,5 @@
 <?php require_once("../../private/initialize.php") ?>
-<?php if (!$session->is_logged_in()) {redirect_to("login.php"); } ?>
-
+<?php if (!$session->is_logged_in()) {redirect_to(WEB_ROOT."login.php"); } ?>
 <?php
 if(request_is_post()) {
     if(!csrf_token_is_valid()) {
@@ -13,7 +12,7 @@ if(request_is_post()) {
     $options = array( 'options' => array('default'=> 0) ); 
 
     if(!filter_input(INPUT_GET,"user")) {
-        $_SESSION["message"] = "Whoops! Please go back to the form.  Required Fiels Missing.";
+        $_SESSION["message"] = "Whoops! Please go back to the form.  Required Fields Missing.";
         redirect_to(WEB_ROOT."/404_error.php");
     }
     $is_number = has_number( filter_input(INPUT_GET,"user"));

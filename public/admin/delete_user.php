@@ -1,4 +1,5 @@
 <?php require_once("../../private/initialize.php") ?>
+<?php if (!$session->is_logged_in()) {redirect_to("login.php"); } ?>
 
 <?php 
     // THIS NEEDS TO BE CLEANED BEFORE USING!

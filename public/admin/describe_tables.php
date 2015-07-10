@@ -1,8 +1,6 @@
+<?php require_once ("../../private/initialize.php");?>
+<?php if (!$session->is_logged_in()) {redirect_to("login.php"); } ?>
 <?php
-require_once ("../../private/initialize.php");
-if (!$session->is_logged_in()) { redirect_to("login.php"); }
-
-
 $table = "photographs";
 $query = "DESCRIBE ". $table;
 $schema = $database->query($query);

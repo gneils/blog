@@ -7,7 +7,7 @@ require_once(PRIVATE_PATH . DS . "includes" . DS . "database_object.php");
 class Photograph extends DatabaseObject {
     
     protected static $table_name = "photographs";
-    protected static $db_fields = array('filename', 'type', 'size', 'caption');
+    protected static $db_fields = array('id', 'filename', 'type', 'size', 'caption');
     protected static $allowed_ext = array('image/jpg', 'image/jpeg', 'image/gif', 'image/png');
     public $id;
     public $filename;
@@ -111,7 +111,7 @@ class Photograph extends DatabaseObject {
     }
     
     public function image_path() {
-        return WEB_ROOT."/".$this->upload_dir."/".$this->filename;
+        return $this->upload_dir."/".$this->filename;
     }
     
     public function size_as_text() {
@@ -169,7 +169,19 @@ class Photograph extends DatabaseObject {
             return true;
         }
     }
+    public function destroy (){
+        // First remove the database entry
+        // then remove the file
+        if($this->delete()) {
+            // then remove file
+            // Note that even though the database entry is gone, this object,
+            // is still around (which lets us use $this-image_path()).
+            $target_path = PUBLIC_PATH.DS.$this->image_path();
+            return unlink($target_path) ? true : false;
+        } else {
+            // Database delete failed
+            return false;
+        }
+    }
 }
-
-
 ?>

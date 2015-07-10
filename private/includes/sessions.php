@@ -9,10 +9,12 @@ class Session {
     
     private $logged_in;
     public $user_id;
+    public $message;
     
     function __construct() {
         session_start();
         $this->check_login();      
+        $this->check_message();
     }
     
     private function check_login() {
@@ -44,15 +46,25 @@ class Session {
     }
     
     /* Session Functions */
-    public function message() {
+    public function message($msg="") {
+        if(!empty($msg)) {
+            // then this is a "set message"
+            $_SESSION["message"] = $msg;
+        } else {
+            // then this is a "get message"
+            return $this->message;
+        }
+    }
+    
+    public function check_message() {
+        // Is there a message stored in the session
         if(isset($_SESSION["message"])) {
-            $output = "<div class=\"message\">";
-            $output .= htmlentities($_SESSION["message"]);
-            $output .= "</div>";
+            // Add it as an attribute and 
+            $this ->message = $_SESSION["message"];
             // clear message after use
-            $_SESSION["message"] = null;
-
-            return $output;
+            unset($_SESSION["message"]);
+        } else {
+            $this->message ="";
         }
     }
 
@@ -82,5 +94,6 @@ class Session {
  }
 
 $session = new Session();
+$message = $session->message();
 
 ?>

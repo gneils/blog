@@ -41,3 +41,21 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Net Beans
+/nbproject
+
+# Config
+/private/config.php
+
+# Upload
+/uploads
+
+# Logs
+/private/logs
+
+# Images
+/public/images
+
+
+

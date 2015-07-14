@@ -70,6 +70,12 @@ class MySQLDatabase {
     public function affected_rows() {
         return mysqli_affected_rows($this->connection);
     }
+    
+    public function prepare($sql) {
+        echo ($sql);
+        
+        return mysqli_prepare($this->connection, $sql);
+    }
 }
 
 $database = new MySQLDatabase();

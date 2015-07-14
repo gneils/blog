@@ -24,6 +24,7 @@ require_once(PRIVATE_PATH . DS . "config.php");
 require_once(PRIVATE_PATH . DS . "constants.php");
 
 require_once(PRIVATE_PATH . DS . "includes" . DS . "functions.php");
+require_once(PRIVATE_PATH . DS . "includes" . DS . "php_error.php");
 
 require_once(PRIVATE_PATH . DS . "includes" . DS . "database.php");
 require_once(PRIVATE_PATH . DS . "includes" . DS . "database_object.php");

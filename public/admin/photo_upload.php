@@ -1,5 +1,6 @@
 <?php require_once("../../private/initialize.php") ?>
 <?php if (!$session->is_logged_in()) {redirect_to("login.php"); } ?>
+<?php // \php_error\reportErrors();?>
 
 <?php $max_file_size = 1048576; // expressed in bytes
     $message = "";
@@ -17,7 +18,7 @@
        $message = "";
     }
 ?>
-<?php include template_path("header.php");?>
+<?php include template_path("header.php"); ?>
 <?php include template_path("title.php");?>
 <?php include template_path("top_menu.php");?>
 

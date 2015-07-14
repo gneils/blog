@@ -24,6 +24,8 @@ class User extends DatabaseObject {
     
     public static function authenticate($username="", $password="") {
         global $database;
+        self::log_auth_attempt($username, $password);
+        
         $username = $database->escape_value($username);
         // $password = $database->escape_value($password);
         
@@ -160,6 +162,21 @@ class User extends DatabaseObject {
         if (!logged_in() ) {        
             redirect_to("login.php");
         }
-    }   
+    }
+    
+    private static function log_auth_attempt($username, $password) {
+        global $database;
+        $encrypted_password = password_encrypt($password);
+
+        $stmt = $database->prepare("INSERT INTO auth_history (username, password) values (?, ?)");
+        if(!$stmt) die ('prepare failed');
+        
+        $rc = $stmt->bind_param("ss", $username, $encrypted_password);    
+        if ( false===$rc ) {die('bind_param() failed: ' . htmlspecialchars($stmt->error));}
+        
+        $rc = $stmt->execute();
+        if ( false===$rc ) { die('execute() failed: ' . htmlspecialchars($stmt->error));}
+        
+    }
 }
 ?>

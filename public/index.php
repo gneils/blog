@@ -52,45 +52,45 @@ include template_path("session_message.php");
     </div>
 </div>
 <?php if ($pagination->total_pages() > 1) : ?>
-        <div class="row">
-            <div class="col-md-12">
-                <nav id="pagination">
-                    <ul class="pagination">
-                    <?php 
-                        if($pagination->has_previous_page()) {
-                            echo "<li><a href =\"".WEB_ROOT."/index.php?page="
-                                    .$pagination->previous_page()
-                                    ."\" aria-label=\"Previous\">&laquo;</a></li>" ;
+    <div class="row">
+        <div class="col-md-12">
+            <nav id="pagination">
+                <ul class="pagination">
+                <?php 
+                    if($pagination->has_previous_page()) {
+                        echo "<li><a href =\"".WEB_ROOT."/index.php?page="
+                                .$pagination->previous_page()
+                                ."\" aria-label=\"Previous\">&laquo;</a></li>" ;
+                    }
+                    for($i=1; $i <= $pagination->total_pages(); $i++) {
+                        $output = "<li ";
+                        if($i == $page) {$output .= " class=\"active\"";}
+                        $output .= ">";
+                        if($i !== $page) {
+                            $output .= "<a href=\"".WEB_ROOT;
+                            $output .= "/index.php?page=".$i."\" ";
+                            $output .= ">{$i}</a>";
+                        } else {
+                            $output .= "<span>{$i}</span>";
                         }
-                        for($i=1; $i <= $pagination->total_pages(); $i++) {
-                            $output = "<li ";
-                            if($i == $page) {$output .= " class=\"active\"";}
-                            $output .= ">";
-                            if($i !== $page) {
-                                $output .= "<a href=\"".WEB_ROOT;
-                                $output .= "/index.php?page=".$i."\" ";
-                                $output .= ">{$i}</a>";
-                            } else {
-                                $output .= "<span>{$i}</span>";
-                            }
-                            $output .= "</li>";
-                            echo $output. PHP_EOL;
-                        }
+                        $output .= "</li>";
+                        echo $output. PHP_EOL;
+                    }
 
-                        if($pagination->has_next_page()) {
-                            echo "<li><a href =\"".WEB_ROOT."/index.php?page="
-                                    .$pagination->next_page()
-                                    ."\">&raquo;</a></li> ".PHP_EOL ;
+                    if($pagination->has_next_page()) {
+                        echo "<li><a href =\"".WEB_ROOT."/index.php?page="
+                                .$pagination->next_page()
+                                ."\">&raquo;</a></li> ".PHP_EOL ;
 
-                        }
-                        if ($page > $pagination->total_pages()  ) {
-                            echo "<a href =".WEB_ROOT."/index.php class=\"btn btn-default\">Back</a>";
-                        } 
-                    ?>
-                    </ul>
-                </nav>
-            </div>
+                    }
+                    if ($page > $pagination->total_pages()  ) {
+                        echo "<a href =".WEB_ROOT."/index.php class=\"btn btn-default\">Back</a>";
+                    } 
+                ?>
+                </ul>
+            </nav>
         </div>
+    </div>
 <?php endif ?>
                         
 <div class="row">

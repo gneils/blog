@@ -7,7 +7,14 @@ require_once(PRIVATE_PATH . DS . "includes" . DS . "database_object.php");
 class Post extends DatabaseObject {
     
     protected static $table_name = "posts";
-    protected static $db_fields = array('id', 'person', 'event_date', 'description', 'tags', 'created','author','rating');
+    protected static $db_fields = array('id', 
+                                        'person', 
+                                        'event_date', 
+                                        'description', 
+                                        'tags', 
+                                        'created',
+                                        'author',
+                                        'rating');
     public $id;
     public $person;
     public $event_date;
@@ -16,6 +23,8 @@ class Post extends DatabaseObject {
     public $created;
     public $author;
     public $rating;
+    public $public;
+
     
     // "new" is a keyword so you can't use it here 
     public static function make($post_id, $author="Anonymous", $body="") {

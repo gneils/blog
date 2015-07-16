@@ -127,9 +127,6 @@ include template_path("top_menu.php");
             <a class="btn btn-default" href="<?php echo WEB_ROOT?>/admin/delete_user.php?user=<?php echo u($current_user->id)?>" onclick="return confirm ('Are you sure?');">Delete User</a>
         </form>
         <br />
-      
-        
-
     </div>
 </div>
 <br />

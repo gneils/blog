@@ -27,7 +27,7 @@ include template_path("top_menu.php");
     <div class="col-md-12">
         <table class="table table-striped">
             <caption>List of Photos</caption>
-            <tr><th>Image</th><th>Name</th><th>Caption</th><th>Type</th><th>size</th><th colspan="2">Action</th></tr>
+            <tr><th>Image</th><th>Name</th><th>Caption</th><th>Type</th><th>size</th><th>Comments</th><th colspan="2">Action</th></tr>
             <?php foreach($photo_objects as $photo): ?>
                 <tr>
                 <td><img src="<?php echo WEB_ROOT."/".h($photo->image_path()); ?>" width="100" alt="<?php echo $photo->filename; ?>"/></td>
@@ -35,6 +35,11 @@ include template_path("top_menu.php");
                 <td><?php echo $photo->caption; ?></td>
                 <td><?php echo $photo->type; ?></td>
                 <td><?php echo $photo->size_as_text()?></td>
+                <td><a href="<?php echo WEB_ROOT?>/admin/comments.php?pid=<?php echo $photo->id?>">
+                    <?php echo count($photo->comments())?>
+                    </a>
+                </td>
+                
                 <td><a href="<?php echo WEB_ROOT?>/admin/edit_photo.php?pid=<?php echo $photo->id?>">Edit</a></td>
                 <td><a href="<?php echo WEB_ROOT?>/admin/delete_photo.php?pid=<?php echo $photo->id?>" onclick="return confirm ('Are you sure?');">Delete</a></td>
             <?php endforeach; ?>

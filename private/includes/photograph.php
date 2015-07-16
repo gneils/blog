@@ -26,6 +26,8 @@ class Photograph extends DatabaseObject {
         // - single-qoutes around all values
         // - escape all values to prevent SQL injection
         $attributes = $this->sanitized_attributes();
+        unset($attributes['id']); // this MySQL version requires that the ID value does not have qoutes.
+
         $sql  = "INSERT INTO " . self::$table_name ." (";
         $sql .= join(", ", array_keys($attributes));
         $sql .= ") VALUES ('";
@@ -106,7 +108,6 @@ class Photograph extends DatabaseObject {
                 $this->errors[] = "The file upload failed, possibly due to incorrect permissions.";
                 return false;
             }
-
         }
     }
     
@@ -124,6 +125,10 @@ class Photograph extends DatabaseObject {
             $size_mb = round($this->size/1048576);
             return "{$size_mb}  MB";
         }
+    }
+    
+    public function comments() {
+        return Comment::find_comments_on($this->id);
     }
     
     public function delete() {

@@ -71,3 +71,20 @@ a{
     cursor: inherit;
     display: block;
 }
+
+.comment {
+	margin-bottom: 15px;
+}
+.author{
+	font-family: Georgia;
+	font-size: 1.3em;
+	line-height:1.3em;
+}
+.comment .body, .comment .actions{
+	margin-left:15px;
+}
+.comment .meta-info{
+	margin-left:15px;
+	font-size: .9em;
+	font-style:italic;
+}

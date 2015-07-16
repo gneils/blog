@@ -26,11 +26,12 @@ include template_path("session_message.php");
             <?php } ?>
         </table>
         <br />
-        <a href="new_user.php">+ Add New User</a>    
-        <br />
-        <br />
-        <a href="dashboard.php">Back to Dashboard</a>      
+        <a href="new_user.php" class="btn btn-default">+ Add New User</a>    
+        <a href="dashboard.php" class="btn btn-default">Back to Dashboard</a>      
     </div>
 </div>
+<br>
+<br>
+
 
 <?php include template_path("footer.php");?>

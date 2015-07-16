@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-
 <html lang="en">
     <head>
-        <title>Diary <?php if(isset($layout_context) == "admin") {echo ucfirst($layout_context);} ?></title>
+        <title>Blog <?php if(isset($layout_context) == "admin") {echo ucfirst($layout_context);} ?></title>
         <meta name="description" content="Our history">
         <meta name="author" content="Greg">
         <meta charset="utf-8">
@@ -12,4 +11,5 @@
         <link href="<?php echo WEB_ROOT?>/css/bootstrap.min.css" media="all" rel="stylesheet" type="text/css" />
         <link href="<?php echo WEB_ROOT?>/css/main.css" media="all" rel="stylesheet" type="text/css" />
         <link href="<?php echo WEB_ROOT?>/css/photos.css" media="all" rel="stylesheet" type="text/css" />
+        <script src="<?php echo WEB_ROOT?>/js/global.js"></script>
     </head>

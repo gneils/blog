@@ -108,4 +108,14 @@ function password_check($password, $existing_hash) {
     }
 }
 
+function datetime_to_text($datetime="") {
+    $unixdatetime = strtotime($datetime);
+    return strftime("%B %d, %Y at %I:%M %p", $unixdatetime);
+}
+
+function date_to_text($date="") {
+    $unixdatetime = strtotime($date);
+    return strftime("%m/%d/%Y", $unixdatetime);
+}
+
 ?>

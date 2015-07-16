@@ -18,7 +18,7 @@
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu" aria-labelledby="drop1">
-                <li><a href="#">Action</a></li>
+                <li><a href="to-do.php">My To Do List</a></li>
                 <li><a href="#">Another action</a></li>
                 <li><a href="#">Something else here</a></li>
                 <li role="separator" class="divider"></li>
@@ -53,8 +53,10 @@
                         echo "<li><a href=\"".WEB_ROOT."/admin/create_user.php\">New  User</a></li>";
                         echo "<li role=\"separator\" class=\"divider\"></li>";
                         echo "<li><a href=\"".WEB_ROOT."/admin/photo_upload.php\">New Photo</a></li>";
-                        echo "<li><a href=\"".WEB_ROOT."/admin/logfile.php\">Log File</a></li>";
                         echo "<li><a href=\"".WEB_ROOT."/admin/list_photos.php\">List Photos</a></li>";
+                        echo "<li role=\"separator\" class=\"divider\"></li>";
+                        echo "<li><a href=\"".WEB_ROOT."/admin/list_posts.php\">List Posts</a></li>";
+                        echo "<li><a href=\"".WEB_ROOT."/admin/logfile.php\">Log File</a></li>";
                         echo "<li role=\"separator\" class=\"divider\"></li>";
                         echo "<li><a href=\"".WEB_ROOT."/admin/logout.php\">Log Out</a></li>";
                     } else {

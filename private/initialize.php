@@ -26,11 +26,15 @@ require_once(PRIVATE_PATH . DS . "constants.php");
 require_once(PRIVATE_PATH . DS . "includes" . DS . "functions.php");
 require_once(PRIVATE_PATH . DS . "includes" . DS . "php_error.php");
 
+require_once(PRIVATE_PATH . DS . "includes" . DS . "sessions.php");
 require_once(PRIVATE_PATH . DS . "includes" . DS . "database.php");
 require_once(PRIVATE_PATH . DS . "includes" . DS . "database_object.php");
-require_once(PRIVATE_PATH . DS . "includes" . DS . "sessions.php");
+require_once(PRIVATE_PATH . DS . "includes" . DS . "pagination.php");
+
 require_once(PRIVATE_PATH . DS . "includes" . DS . "user.php");
 require_once(PRIVATE_PATH . DS . "includes" . DS . "photograph.php");
+require_once(PRIVATE_PATH . DS . "includes" . DS . "comment.php");
+require_once(PRIVATE_PATH . DS . "includes" . DS . "post.php");
 
 require_once(PRIVATE_PATH . DS . "security" . DS . "validations.php");
 require_once(PRIVATE_PATH . DS . "security" . DS . "sanitize_functions.php");

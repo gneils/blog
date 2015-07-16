@@ -43,7 +43,7 @@ include template_path("top_menu.php");
 <div class="row">
     <div class="col-md-offset-4 col-md-4 well well-lg">
         <h4>Login</h4>  
-        <form action="login.php" method="post">
+        <form action="<?php echo WEB_ROOT."/admin/"?>login.php" method="post">
             <?php echo csrf_token_tag()?>
             <div class="form-group">
                 <label for="username">Username</label>

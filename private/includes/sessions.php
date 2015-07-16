@@ -49,7 +49,12 @@ class Session {
     public function message($msg="") {
         if(!empty($msg)) {
             // then this is a "set message"
-            $_SESSION["message"] = $msg;
+            if(isset($_SESSION["message"])) {
+                $_SESSION['message'] .= $msg;
+            } else {
+                $_SESSION['message'] = $msg;
+            }
+                
         } else {
             // then this is a "get message"
             return $this->message;

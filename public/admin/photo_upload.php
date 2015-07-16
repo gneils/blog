@@ -2,7 +2,7 @@
 <?php if (!$session->is_logged_in()) {redirect_to("login.php"); } ?>
 <?php // \php_error\reportErrors();?>
 
-<?php $max_file_size = 1048576; // expressed in bytes
+<?php $max_file_size = 1048576 * 16; // expressed in bytes
     $message = "";
     if(isset($_POST['submit'])) {
         $photo = new Photograph();

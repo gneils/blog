@@ -12,7 +12,7 @@ class MySQLDatabase {
     public function open_connection() {
         $this->connection = mysqli_connect(DB_SERVER,DB_USER, DB_PASS, DB_NAME);
         if(mysqli_connect_errno()) {
-            $_SESSION['message'] = "Cannot Confirm Query. Database query failed.";
+            $_SESSION['message'] = "Cannot Confirm Connection.";
             redirect_to(WEB_ROOT."/404_error.php");
             // or this way for debug
             die("Database connection failed: " .
@@ -31,15 +31,15 @@ class MySQLDatabase {
     
     public function query($sql) {
         $result = mysqli_query($this->connection, $sql);
-        $this->confirm_query($result);
-        // $_SESSION['message'] .= $sql;
-        // $_SESSION['message'] .= "-" . mysqli_error($this->connection);
+        $this->confirm_query($result, $sql);
         return $result;
     }
     
-    private function confirm_query($result) {
+    private function confirm_query($result, $sql="") {
         if(!$result) {
-            $_SESSION['message'] = "Cannot Confirm Query. Database query failed.";
+            $_SESSION['message'] = "Cannot Confirm Query! Database query failed.<br>";
+            $_SESSION['message'] .= $sql ."<br>";
+            $_SESSION['message'] .= "-" . mysqli_error($this->connection). "<br>";
             redirect_to(WEB_ROOT."/404_error.php");
         }
     }

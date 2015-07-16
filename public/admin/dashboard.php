@@ -15,11 +15,9 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 <div class="row">
     <div class="col-md-12">
         <div id="page">
-            <ul>
-                <li><a href="manage_content.php">Manage Web Site Content</a></li>
-                <li><a href="manage_users.php">Mange Users</a></li>
-                <li><a href="logout.php">Logout</a></li>
-            </ul>
+                <a href="manage_content.php" class="btn btn-default">Manage Web Site Content</a>
+                <a href="manage_users.php" class="btn btn-default">Mange Users</a>
+                <a href="logout.php" class="btn btn-default">logout</a>
         </div>
     </div>
 </div>

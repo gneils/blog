@@ -10,11 +10,11 @@ include template_path("session_message.php");
         <h2>Opps</h2> 
     </div>
 </div>
-<?php if(!isset($session->message)): ?>
+<?php if(!isset($session->message)){ ?>
 	<div class="row">
 	    <div class="col-md-12">
 		<p>Sorry we can not find the page you were looking for</p>
 	    </div>
 	</div>
-<?php endif; ?>
+<?php } else {echo $session->message;}?>
 <?php include template_path("footer.php");?>

@@ -1,5 +1,5 @@
 <?php require_once("../../private/initialize.php") ?>
-<?php if (!session->is_logged_in()) {redirect_to("login.php"); } ?>
+<?php if (!$session->is_logged_in()) { redirect_to("login.php"); } ?>
 <?php
 // In an application, this could be moved to a config file
 $upload_errors = array(

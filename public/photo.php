@@ -20,8 +20,12 @@
         if($new_comment && $new_comment->save()) {
             // comment saved
             // No message needed; seeing the comment is proof enough.              
-           $session->message("Your comment was saved.");
-            redirect_to(WEB_ROOT."/photo.php?pid=".$photo->id);
+            if($new_comment->send_notification()) {
+                $session->message("Thank you.  Your comment is pending review.");           
+            } else {
+                $session->message("Your comment was saved.");           
+            }
+           redirect_to(WEB_ROOT."/photo.php?pid=".$photo->id);
         } else {
             // failed
             $message = "There was an error that prevented the comment from being saved.";

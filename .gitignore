@@ -57,5 +57,8 @@ Temporary Items
 # Images
 /public/images
 
+# PHPMailer folder
+/private/includes/PHPMailer
+
 
 

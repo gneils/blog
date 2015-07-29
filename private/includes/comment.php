@@ -7,12 +7,13 @@ require_once(PRIVATE_PATH . DS . "includes" . DS . "database_object.php");
 class Comment extends DatabaseObject {
     
     protected static $table_name = "comments";
-    protected static $db_fields = array('id', 'photograph_id', 'created', 'author', 'body');
+    protected static $db_fields = array('id', 'photograph_id', 'created', 'author', 'body', 'approved');
     public $id;
     public $photograph_id;
     public $created;
     public $author;
     public $body;
+    public $approved;
     
     // "new" is a keyword so you can't use it here 
     public static function make($photo_id, $author="Anonymous", $body="") {
@@ -87,8 +88,6 @@ class Comment extends DatabaseObject {
         return ($database->affected_rows() == 1) ? true : false;
     }
     
-
-    
     public function save() {
         // A new record won't have an id yet
         return isset($this->id) ? $this->update() : $this->create();
@@ -107,6 +106,42 @@ class Comment extends DatabaseObject {
         return ($database->affected_rows() == 1) ? true : false;
     }
     
-    
+    public function send_notification() {
+        $to_name = "Greg Neils";
+        $to = "mrExample@example.com";
+        $subject = "New Photo Gallery Comment";
+        $message = "A New comment was recieved at " . strftime("%T", time());
+        $message = wordwrap($message, 70);
+        $from_name ="ME";
+        $from = "me@example.com";
+
+        // PHP mail version 
+        $mail = new PHPMailer;
+        $mail->IsSMTP();
+        $mail->Host = MAIL_HOST;
+        $mail->SMTPAuth = MAIL_AUTH;
+        $mail->Username = MAIL_USERNAME;
+        $mail->Password = MAIL_PASSWORD;
+        $mail->SMTPSecure = MAIL_SECURE;
+        $mail->Port = MAIL_PORT;
+
+        $mail->FromName = $from_name;
+        $mail->From = $from;
+        $mail->addAddress($to, $to_name);
+        $mail->Subject = $subject;
+        $created = datetime_to_text($this->created);
+        $mail->Body = <<<EMAILBODY
+A new comment has been received in the Photo Gallery.
+                
+Photograph: {$photo->caption}
+                
+At {$created}, {$this->author} wrote: 
+
+{$this->body}
+EMAILBODY;
+
+        $result = $mail->send();
+        return $result;
+    }    
 }
 ?>

@@ -29,6 +29,9 @@
             <li>How to approve new comment? Variable named "status"?</li>
             <li>How to easy embedding photos into posts</li>
             <li>Create Table by Table Check Digit</li>
+            <li>Admin Page to approve comments</li>
+            <li>Only show approved comments</li>
+            <li>Move Mailer from photo comment to its own class.</li>
         </ul>
     </div>
 </div>

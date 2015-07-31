@@ -71,9 +71,7 @@ class MySQLDatabase {
         return mysqli_affected_rows($this->connection);
     }
     
-    public function prepare($sql) {
-        echo ($sql);
-        
+    public function prepare($sql) {      
         return mysqli_prepare($this->connection, $sql);
     }
 }

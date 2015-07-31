@@ -31,7 +31,6 @@ class User extends DatabaseObject {
         
         $sql = "SELECT * FROM users ";
         $sql .= "WHERE username = '{$username}' ";
-        // $sql .= "AND password = '{$password}' "; // modifying
         $sql .= "LIMIT 1";
         $result_array = self::find_by_sql($sql);
        
@@ -78,7 +77,6 @@ class User extends DatabaseObject {
         // - escape all values to prevent SQL injection
         $attributes = $this->sanitized_attributes();
         
-        
         $sql  = "INSERT INTO " . self::$table_name ." (";
         $sql .= join(", ", array_keys($attributes));
         
@@ -119,9 +117,7 @@ class User extends DatabaseObject {
         $database->query($sql);
         return ($database->affected_rows() == 1) ? true : false;
     }
-    
 
-    
     public function save() {
         // A new record won't have an id yet
         return isset($this->id) ? $this->update() : $this->create();
@@ -139,7 +135,6 @@ class User extends DatabaseObject {
         $database->query($sql);
         return ($database->affected_rows() == 1) ? true : false;
     }
-
 
     public function attempt_login($username, $password) {
         global $database;
@@ -175,8 +170,7 @@ class User extends DatabaseObject {
         if ( false===$rc ) {die('bind_param() failed: ' . htmlspecialchars($stmt->error));}
         
         $rc = $stmt->execute();
-        if ( false===$rc ) { die('execute() failed: ' . htmlspecialchars($stmt->error));}
-        
+        if ( false===$rc ) { die('execute() failed: ' . htmlspecialchars($stmt->error));}        
     }
 }
 ?>

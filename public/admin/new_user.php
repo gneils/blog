@@ -5,7 +5,6 @@ include template_path("header.php");
 include template_path("title.php");
 include template_path("top_menu.php");
 ?>
-
 <div class="row">
     <div class="col-md-offset-2 col-md-6">
         <?php echo $session->message(); ?>

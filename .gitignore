@@ -1,4 +1,5 @@
-# Windows image file caches
+# Windows image file caches #
+#############################
 Thumbs.db
 ehthumbs.db
 
@@ -28,7 +29,8 @@ $RECYCLE.BIN/
 .AppleDouble
 .LSOverride
 
-# Thumbnails
+# Thumbnails #
+##############
 ._*
 
 # Files that might appear on external disk
@@ -42,23 +44,35 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# Net Beans
+# Packages #
+############
+
+# Net Beans #
+#############
 /nbproject
 
-# Config
+# Config #
+##########
 /private/config.php
 
-# Upload
+# Upload #
+##########
 /uploads
 
-# Logs
+# Logs #
+########
 /private/logs
 
-# Images
+# Images #
+##########
 /public/images
 
-# PHPMailer folder
+# PHPMailer folder #
+####################
 /private/includes/PHPMailer
+
+*.sass-cache*
+
 
 
 

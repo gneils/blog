@@ -55,7 +55,9 @@
                         echo "<li><a href=\"".WEB_ROOT."/admin/photo_upload.php\">New Photo</a></li>";
                         echo "<li><a href=\"".WEB_ROOT."/admin/list_photos.php\">List Photos</a></li>";
                         echo "<li role=\"separator\" class=\"divider\"></li>";
+                        echo "<li><a href=\"".WEB_ROOT."/admin/new_post.php\">New Post</a></li>";
                         echo "<li><a href=\"".WEB_ROOT."/admin/list_posts.php\">List Posts</a></li>";
+                        echo "<li role=\"separator\" class=\"divider\"></li>";
                         echo "<li><a href=\"".WEB_ROOT."/admin/logfile.php\">Log File</a></li>";
                         echo "<li role=\"separator\" class=\"divider\"></li>";
                         echo "<li><a href=\"".WEB_ROOT."/admin/logout.php\">Log Out</a></li>";

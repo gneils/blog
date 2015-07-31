@@ -1,5 +1,6 @@
 <?php require_once("../../private/initialize.php") ?>
 <?php if (!$session->is_logged_in()) {redirect_to("WEB_ROOT.login.php"); } ?>
+<?php $persons = Post::get_all_persons();?>
 <?php
 if(request_is_post()) {
     if(!csrf_token_is_valid()) {
@@ -41,12 +42,22 @@ if (isset($_POST["submit"])) {
         $safe_id = $database->escape_value(filter_input(INPUT_POST, "pid"));
         $safe_person = $database->escape_value(filter_input(INPUT_POST, "person" ) ) ;
         $safe_description = $database->escape_value(filter_input(INPUT_POST, "description" ) ) ;
+        $safe_title = $database->escape_value(filter_input(INPUT_POST, "title" ) ) ;
+        $safe_visible = $database->escape_value(filter_input(INPUT_POST, "visible" ) ) ;
+        $safe_public = $database->escape_value(filter_input(INPUT_POST, "public" ) ) ;
         $safe_author = $database->escape_value(filter_input(INPUT_POST, "author" ) ) ;
         $safe_tags = $database->escape_value(filter_input(INPUT_POST, "tags" ) ) ;
         $query  = "UPDATE posts SET ";
         $query .= "person= '{$safe_person}', ";
+        $query .= "title = '{$safe_title}', ";
         $query .= "description = '{$safe_description}', ";
         $query .= "author = '{$safe_author}', ";
+        if ($safe_visible == 1 || $safe_visible == 0) {
+            $query .= "visible = '{$safe_visible}', ";
+        }
+        if ($safe_public == 1 || $safe_public == 0) {
+            $query .= "public = '{$safe_public}', ";
+        }
         $query .= "tags = '{$safe_tags}' ";
         $query .= "WHERE id = {$safe_id} ";
         $query .= "LIMIT 1";
@@ -82,22 +93,62 @@ include template_path("top_menu.php");
     <div class="col-md-10 col-md-offset-1">
         <form action="<?php echo WEB_ROOT?>/admin/edit_post.php" method="post">
             <?php echo csrf_token_tag(); ?>
-            <input type="hidden" name="pid" id="pid" maxlength="30" value="<?php echo h($post->id);?>" /> 
+            <input type="hidden" name="pid" id="pid" value="<?php echo h($post->id);?>" />              
             <div class="form-group">
-                <label for="Person">Person</label>
-                <input type="text" name="person" id="person" maxlength="30" class="form-control" value="<?php echo h($post->person);?>"/> 
+                <label for="person">Person</label>
+                <select name="person" id="person" class="form-control"> 
+                    <?php 
+                        foreach ($persons as $person) {
+                            echo "<option value=\"".$person."\"";
+                            if ($post->person == $person) { echo " selected";}
+                            
+                            echo ">".$person."</option>";
+                        }
+                    ?>
+                </select>
+                
             </div>
             <div class="form-group">
                 <label for="event_date">Date</label>
                 <input type="date" name="event_date" id="event_date" class="form-control" value="<?php echo h($post->event_date);?>"/> 
             </div>
             <div class="form-group">
+                <label for="title">title</label>
+                <input type="text" name="title" id="title"  maxlength="100" class="form-control" value="<?php echo h($post->title);?>"/> 
+            </div>
+            <div class="form-group">
                 <label for="description">Description</label>
-                <textarea name="description" id="description" class="form-control"><?php echo h($post->description);?></textarea>
+                <textarea name="description" id="description" class="form-control" rows="10"><?php echo h($post->description);?></textarea>
             </div>
             <div class="form-group">
                 <label for="author">Author</label>
                 <input type="text" name="author" id="author" maxlength="30" class="form-control" value="<?php echo h($post->author);?>"/> 
+            </div>          
+            <div class="radio">
+                <p style="display: inline-block;">Public</p>
+                <label class="radio-inline">
+                    <input type="radio" name="public" id="public"  value="0"
+                        <?php if(h($post->public) == 0) {echo " checked";}?>
+                    >No
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="public" id="public"  value="1"
+                        <?php if(h($post->public) == 1) {echo " checked";}?>
+                    >Yes
+                </label>
+            </div>
+            <div class="radio">
+                <p style="display: inline-block;">Visible</p>
+                <label class="radio-inline">
+                    <input type="radio" name="visible" id="visible" value="0"
+                        <?php if(h($post->visible) == 0) {echo " checked";}?>
+                    >No
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="visible" id="visible" value="1"
+                        <?php if(h($post->visible) == 1) {echo " checked";}?>
+                    >Yes
+                </label>
             </div>
             <div class="form-group">
                 <label for="tags">Tags</label>
@@ -107,7 +158,7 @@ include template_path("top_menu.php");
             &nbsp;
             <a class="btn btn-default" href="<?php echo WEB_ROOT?>/admin/list_posts.php">Cancel</a>
             &nbsp;
-            <a class="btn btn-default" href="<?php echo WEB_ROOT?>/admin/delete_posts.php?pid=<?php echo u($post->id)?>" onclick="return confirm ('Are you sure?');">Delete photo</a>
+            <a class="btn btn-default" href="<?php echo WEB_ROOT?>/admin/delete_post.php?pid=<?php echo u($post->id)?>" onclick="return confirm ('Are you sure?');">Delete post</a>
         </form>
         <br />
     </div>

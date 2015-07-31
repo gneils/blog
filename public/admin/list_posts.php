@@ -5,7 +5,7 @@
     $page = !empty($_GET['page'] ) ? (int)$_GET['page'] : 1;
 
     // 2. records per page ($per_page)
-    $per_page = 10;
+    $per_page = 15;
             
     // 3. total record count ($total_count)
     $total_count = Post::count_all();
@@ -37,7 +37,7 @@ include template_path("top_menu.php");
 </div>
 <div class="row">
     <div class="col-md-12">
-<a href="<?php echo WEB_ROOT?>/admin/create_post.php" class="btn btn-primary">Create a new post</a>
+<a href="<?php echo WEB_ROOT?>/admin/new_post.php" class="btn btn-primary">Create a new post</a>
     </div>
 </div>
 <br />
@@ -46,11 +46,20 @@ include template_path("top_menu.php");
     <div class="col-md-12">
         <table class="table table-striped">
             <caption>Posts</caption>
-            <tr><th>Person</th><th>Date</th><th>Description</th><th>Author</th><th>Tags</th><th>Rating</th><th colspan="2">Action</th></tr>
+            <tr><th>Person</th>
+                <th>Date</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Author</th>
+                <th>Tags</th>
+                <th>Rating</th>
+                <th colspan="2">Action</th>
+            </tr>
             <?php foreach($posts as $post): ?>
                 <tr>
                 <td><?php echo $post->person; ?></td>
                 <td><?php echo date_to_text($post->event_date); ?></td>
+                <td><?php echo $post->title; ?></td>
                 <td><?php echo $post->description; ?></td>
                 <td><?php echo $post->author?></td>
                 <td><?php echo $post->tags?></td>

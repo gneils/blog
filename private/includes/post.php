@@ -10,20 +10,26 @@ class Post extends DatabaseObject {
     protected static $db_fields = array('id', 
                                         'person', 
                                         'event_date', 
-                                        'description', 
-                                        'tags', 
                                         'created',
+                                        'title',
+                                        'description', 
                                         'author',
-                                        'rating');
+                                        'tags', 
+                                        'rating',
+                                        'public',
+                                        'visible');
     public $id;
     public $person;
+    public $persons;
     public $event_date;
-    public $description;
-    public $tags;
     public $created;
+    public $title;
+    public $description;
     public $author;
+    public $tags;
     public $rating;
     public $public;
+    public $visible;
 
     
     // "new" is a keyword so you can't use it here 
@@ -48,6 +54,20 @@ class Post extends DatabaseObject {
         return self::find_by_sql($sql);
     }
     
+    public static function get_all_persons() {
+        global $database;
+        $sql = "SELECT person FROM " . self::$table_name;
+        $sql .= " GROUP BY person";
+        $result_set = self::find_by_sql($sql);
+        $persons=[]; 
+        foreach ($result_set as $key => $value ) {
+            foreach ($value as $column => $that) {
+                if ($column =='person'){array_push($persons,$that);}
+            }
+        }
+        return $persons;
+    }
+
     public function create() {
         global $database;
         // Don't forget your SQL syntax and good habits;

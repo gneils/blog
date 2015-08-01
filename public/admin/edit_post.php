@@ -39,14 +39,14 @@ if (isset($_POST["submit"])) {
 
     if(empty($errors)){
         // perform update
-        $safe_id = $database->escape_value(filter_input(INPUT_POST, "pid"));
-        $safe_person = $database->escape_value(filter_input(INPUT_POST, "person" ) ) ;
-        $safe_description = $database->escape_value(filter_input(INPUT_POST, "description" ) ) ;
-        $safe_title = $database->escape_value(filter_input(INPUT_POST, "title" ) ) ;
+        $safe_id = (int) $database->escape_value(filter_input(INPUT_POST, "pid"));
+        $safe_person = s($database->escape_value(filter_input(INPUT_POST, "person" ) ) );
+        $safe_description = s($database->escape_value(filter_input(INPUT_POST, "description" ) )) ;
+        $safe_title = s($database->escape_value(filter_input(INPUT_POST, "title" ) ) );
         $safe_visible = $database->escape_value(filter_input(INPUT_POST, "visible" ) ) ;
         $safe_public = $database->escape_value(filter_input(INPUT_POST, "public" ) ) ;
-        $safe_author = $database->escape_value(filter_input(INPUT_POST, "author" ) ) ;
-        $safe_tags = $database->escape_value(filter_input(INPUT_POST, "tags" ) ) ;
+        $safe_author = s($database->escape_value(filter_input(INPUT_POST, "author" ) )) ;
+        $safe_tags = s($database->escape_value(filter_input(INPUT_POST, "tags" ) )) ;
         $query  = "UPDATE posts SET ";
         $query .= "person= '{$safe_person}', ";
         $query .= "title = '{$safe_title}', ";
@@ -106,7 +106,6 @@ include template_path("top_menu.php");
                         }
                     ?>
                 </select>
-                
             </div>
             <div class="form-group">
                 <label for="event_date">Date</label>

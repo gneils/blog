@@ -14,6 +14,7 @@
     
         // Instead of finding all records, just find the records for this page
     $sql = "SELECT * FROM posts ";
+    $sql .= "ORDER BY event_date DESC ";
     $sql .= "LIMIT {$per_page} ";
     $sql .= "OFFSET {$pagination->offset()}";
     $posts = Post::find_by_sql($sql);
@@ -57,13 +58,13 @@ include template_path("top_menu.php");
             </tr>
             <?php foreach($posts as $post): ?>
                 <tr>
-                <td><?php echo $post->person; ?></td>
+                <td><?php echo h($post->person); ?></td>
                 <td><?php echo date_to_text($post->event_date); ?></td>
-                <td><?php echo $post->title; ?></td>
-                <td><?php echo $post->description; ?></td>
-                <td><?php echo $post->author?></td>
-                <td><?php echo $post->tags?></td>
-                <td><?php echo $post->rating?></td>               
+                <td><?php echo h($post->title); ?></td>
+                <td><?php echo nl2br(h($post->description)); ?></td>
+                <td><?php echo h($post->author)?></td>
+                <td><?php echo h($post->tags)?></td>
+                <td><?php echo h($post->rating)?></td>               
                 <td><a href="<?php echo WEB_ROOT?>/admin/edit_post.php?pid=<?php echo $post->id?>">Edit</a></td>
                 <td><a href="<?php echo WEB_ROOT?>/admin/delete_post.php?pid=<?php echo $post->id?>" onclick="return confirm ('Are you sure?');">Delete</a></td>
             <?php endforeach; ?>

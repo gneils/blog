@@ -7,7 +7,7 @@ require_once(PRIVATE_PATH . DS . "includes" . DS . "database_object.php");
 class Photograph extends DatabaseObject {
     
     protected static $table_name = "photographs";
-    protected static $db_fields = array('id', 'filename', 'type', 'size', 'caption', 'public');
+    protected static $db_fields = array('id', 'filename', 'type', 'size', 'caption', 'public', 'upload_time', 'username');
     protected static $allowed_ext = array('image/jpg', 'image/jpeg', 'image/gif', 'image/png');
     public $id;
     public $filename;
@@ -15,10 +15,13 @@ class Photograph extends DatabaseObject {
     public $size;
     public $caption;
     public $public;
+    public $upload_time;
+    public $username;
+           
     
     private   $temp_path;
     protected $upload_dir = "images";
-    public    $errors=array();
+    public    $errors = array();
 
     public function create() {
         global $database;

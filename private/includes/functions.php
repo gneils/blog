@@ -85,7 +85,7 @@ function logged_in() {
 
 function confirm_logged_in() {
     if (!logged_in() ) {        
-        redirect_to("login.php");
+        redirect_to(WEB_ROOT."/admin/login.php");
     }
 }
 function password_encrypt($password) {

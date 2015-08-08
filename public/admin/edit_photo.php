@@ -1,5 +1,5 @@
 <?php require_once("../../private/initialize.php") ?>
-<?php if (!$session->is_logged_in()) {redirect_to("WEB_ROOT.login.php"); } ?>
+<?php if (!$session->is_logged_in()) {redirect_to(WEB_ROOT."/admin/login.php"); } ?>
 <?php
 if(request_is_post()) {
     if(!csrf_token_is_valid()) {
@@ -74,14 +74,15 @@ include template_path("top_menu.php");
 
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
-        <img src="<?php echo WEB_ROOT."/".h($photo->image_path()); ?>" width="100" alt="<?php echo $photo->filename; ?>"/>
-        <?php echo $photo->caption; ?>
+        <div class ="text-center">
+        <img src="<?php echo WEB_ROOT."/".h($photo->image_path()); ?>" width="320" alt="<?php echo $photo->filename; ?>"/>
+        </div>
         <form action="<?php echo WEB_ROOT?>/admin/edit_photo.php" method="post">
             <?php echo csrf_token_tag(); ?>
             <input type="hidden" name="pid" id="pid" maxlength="30" value="<?php echo h($photo->id);?>" /> 
             <div class="form-group">
                 <label for="caption">Caption</label>
-                <input type="text" name="caption" id="caption" maxlength="30" class="form-control" /> 
+                <input type="text" name="caption" id="caption" maxlength="30" class="form-control" value="<?php echo h($photo->caption);?> "/> 
             </div>
             <button type="submit" name="submit" value="edit-photo" class="btn btn-primary">Save</button>
             &nbsp;

@@ -1,5 +1,5 @@
 <?php require_once ("../../private/initialize.php");
-if (!$session->is_logged_in()) { redirect_to("login.php"); }
+if (!$session->is_logged_in()) { redirect_to(WEB_ROOT."/admin/login.php"); }
 ?>
 
 <?php 
@@ -38,7 +38,7 @@ if (isset($_POST["submit"])) {
 
     if(!empty($errors)){
         $_SESSION["errors"] = $errors;
-        redirect_to("new_user.php");
+        redirect_to(WEB_ROOT."/admin/new_user.php");
     }
     
     $query  = "INSERT INTO users (";
@@ -53,14 +53,14 @@ if (isset($_POST["submit"])) {
     if ($result && $database->affected_rows() >=0) {
         // Success
         $_SESSION["message"] = "User created.";
-        redirect_to("manage_users.php");
+        redirect_to(WEB_ROOT."/admin/manage_users.php");
     } else {
         // Failure
         $_SESSION["message"] = "Sorry failed to create ". h(s($username))."<br>". $query;     
-        redirect_to("new_user.php");
+        redirect_to(WEB_ROOT."/admin/new_user.php");
     }
 } else {
     // this is probably a get request
-    redirect_to("new_user.php");
+    redirect_to(WEB_ROOT."/admin/new_user.php");
 }
 ?>

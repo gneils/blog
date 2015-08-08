@@ -1,5 +1,5 @@
 <?php require_once("../../private/initialize.php") ?>
-<?php if (!$session->is_logged_in()) {redirect_to("login.php"); } ?>
+<?php if (!$session->is_logged_in()) {redirect_to("/admin/login.php"); } ?>
 
 <?php 
     // must have an id

@@ -1,6 +1,6 @@
 <?php
 require_once ("../../private/initialize.php");
-if (!$session->is_logged_in()) { redirect_to("login.php"); }
+if (!$session->is_logged_in()) { redirect_to(WEB_ROOT."/admin/login.php"); }
 ?>
 <?php $users = User::find_all();?>
 <?php 

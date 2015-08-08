@@ -1,15 +1,15 @@
 <?php require_once("../../private/initialize.php") ?>
-<?php if (!$session->is_logged_in()) {redirect_to("WEB_ROOT.login.php"); } ?>
+<?php if (!$session->is_logged_in()) {redirect_to(WEB_ROOT."/admin/login.php"); } ?>
 <?php 
     if(empty($_GET['pid'])) {
         $session->message("No photograph ID was provided");
-        redirect_to(WEB_ROOT.'index.php');
+        redirect_to(WEB_ROOT.'/index.php');
     }
     
     $photo = Photograph::find_by_id($_GET['pid']);
     if(!$photo){
         $session->message("The photo could not be located");
-        redirect_to(WEB_ROOT.'index.php');
+        redirect_to(WEB_ROOT.'/index.php');
     }
     
     $comments = $photo->comments();

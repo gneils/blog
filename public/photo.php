@@ -2,13 +2,13 @@
 <?php 
     if(empty($_GET['pid'])) {
         $session->message("No photograph ID was provided");
-        redirect_to('index.php');
+        redirect_to(WEB_ROOT."/index.php");
     }
     
     $photo = Photograph::find_by_id($_GET['pid']);
     if(!$photo){
         $session->message("The photo could not be located");
-        redirect_to('index.php');
+        redirect_to(WEB_ROOT.'/index.php');
     }
     
     if(isset($_POST['submit'])) {

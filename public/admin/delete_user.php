@@ -20,10 +20,10 @@
     if ($result && $database->affected_rows() >=0) {
         // Success
         $_SESSION["message"] = "User Info Deleted.";
-        redirect_to("manage_users.php");
+        redirect_to(WEB_ROOT."/admin/manage_users.php");
     } else {
         $_SESSION["message"] = "User deletion failed.";
-        redirect_to("manage_users.php?user={$id}");
+        redirect_to(WEB_ROOT."/admin/manage_users.php?user={$id}");
     }
 ?>
     

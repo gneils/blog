@@ -1,5 +1,5 @@
 <?php require_once ("../../private/initialize.php");?>
-<?php if (!$session->is_logged_in()) {redirect_to("login.php"); } ?>
+<?php if (!$session->is_logged_in()) {redirect_to("/admin/login.php"); } ?>
 <?php 
     // 1. the current page number ($current_page)
     $page = !empty($_GET['page'] ) ? (int)$_GET['page'] : 1;
@@ -18,8 +18,7 @@
     $sql .= "LIMIT {$per_page} ";
     $sql .= "OFFSET {$pagination->offset()}";
     $posts = Post::find_by_sql($sql);
-    
-    ?>
+?>
 <?php 
 include template_path("header.php");
 include template_path("title.php");
@@ -67,6 +66,7 @@ include template_path("top_menu.php");
                 <td><?php echo h($post->rating)?></td>               
                 <td><a href="<?php echo WEB_ROOT?>/admin/edit_post.php?pid=<?php echo $post->id?>">Edit</a></td>
                 <td><a href="<?php echo WEB_ROOT?>/admin/delete_post.php?pid=<?php echo $post->id?>" onclick="return confirm ('Are you sure?');">Delete</a></td>
+                </tr>
             <?php endforeach; ?>
         </table>        
     </div>

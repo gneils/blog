@@ -1,5 +1,5 @@
 <?php require_once ("../../private/initialize.php");?>
-<?php if (!$session->is_logged_in()) {redirect_to("login.php"); } ?>
+<?php if (!$session->is_logged_in()) {redirect_to(WEB_ROOT."/admin/login.php"); } ?>
 <?php
 $table = "photographs";
 $query = "DESCRIBE ". $table;

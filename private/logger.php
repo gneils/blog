@@ -34,7 +34,7 @@ function clear_log() {
             // redirect to this same page so that the URL won't have 
             // clear="true" anymore. Clears out parameter, good practice. 
             // Don't leave something dangerous in the URL string.
-            redirect_to("logfile.php"); 
+            redirect_to(WEB_ROOT."/admin/logfile.php"); 
         }
     }
 }

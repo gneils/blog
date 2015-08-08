@@ -1,5 +1,5 @@
 <?php require_once("../../private/initialize.php") ?>
-<?php if (!$session->is_logged_in()) {redirect_to(WEB_ROOT."login.php"); } ?>
+<?php if (!$session->is_logged_in()) {redirect_to(WEB_ROOT."/admin/login.php"); } ?>
 <?php
 if(request_is_post()) {
     if(!csrf_token_is_valid()) {
@@ -71,7 +71,7 @@ if (isset($_POST["submit"])) {
         if ($result && $database->affected_rows() >=0) {
             // Success
             $_SESSION["message"] = "User Info Updated.";
-            redirect_to("manage_users.php?user=" . $safe_id );
+            redirect_to("/admin/manage_users.php?user=" . $safe_id );
         } else {
             // Failure
             $message = "Sorry, user was not updated:" .$database->affected_rows();

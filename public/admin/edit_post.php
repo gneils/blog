@@ -1,5 +1,5 @@
 <?php require_once("../../private/initialize.php") ?>
-<?php if (!$session->is_logged_in()) {redirect_to("WEB_ROOT.login.php"); } ?>
+<?php if (!$session->is_logged_in()) {redirect_to(WEB_ROOT."/admin/login.php"); } ?>
 <?php $persons = Post::get_all_persons();?>
 <?php
 if(request_is_post()) {
@@ -26,7 +26,7 @@ if(request_is_post()) {
 if (!$post) {
     // ID was missing or invalid or 
     // ID couldn't be found in the database   
-    $session->message("The post could not be found.");
+    $session->message("The post could not be found.");    
     redirect_to(WEB_ROOT."/admin/list_posts.php"); 
 }
 
@@ -80,6 +80,7 @@ if (isset($_POST["submit"])) {
 ?>
 
 <?php 
+
 include template_path("header.php");
 include template_path("title.php");
 include template_path("top_menu.php");

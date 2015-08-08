@@ -1,5 +1,5 @@
 <?php require_once("../../private/initialize.php") ?>
-<?php if (!$session->is_logged_in()) {redirect_to("login.php"); } ?>
+<?php if (!$session->is_logged_in()) {redirect_to(WEB_ROOT."/admin/login.php"); } ?>
 <?php // \php_error\reportErrors();?>
 
 <?php $max_file_size = 1048576 * 16; // expressed in bytes
@@ -10,7 +10,7 @@
         $photo->attach_file($_FILES['file_upload']);
         if($photo->save()) {
             $session->message("Photograph uploaded successfully.");
-            redirect_to('list_photos.php');
+            redirect_to(WEB_ROOT.'/admin/list_photos.php');
         } else {
             $message = join("<br />", $photo->errors);
         } 

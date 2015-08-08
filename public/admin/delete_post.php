@@ -9,11 +9,14 @@
     }
     
     $post = Post::find_by_id($_GET['pid']);
-    if($post && $post->destroy()) {
-        $session->message("The post {$post->filename} was deleted");
-        redirect_to(WEB_ROOT.'/admin/list_photos.php');
+
+    if($post && $post->delete()) {
+        
+        
+        $session->message("The post {$post->title} was deleted");
+        redirect_to(WEB_ROOT.'/admin/list_posts.php');
     } else {
-        $session->message("The post {$post->filename} could not be deleted.");
+        $session->message("The post {$post->title} could not be deleted.");
         redirect_to(WEB_ROOT.'/admin/list_posts.php');
     }
 ?>

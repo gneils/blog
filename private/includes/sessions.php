@@ -10,6 +10,9 @@ class Session {
     private $logged_in;
     public $user_id;
     public $message;
+    public $last_request_time;
+    public $current_request_time ;
+    public $time_delta;
     
     function __construct() {
         session_start();
@@ -21,6 +24,20 @@ class Session {
         if(isset($_SESSION['user_id'])) {
             $this->user_id = $_SESSION['user_id'];
             $this->logged_in = true;
+            if(isset( $_SESSION['request_time']  )) {
+                $this->last_request_time = $_SESSION['request_time'];
+            } else {
+                $this->last_request_time = time();                
+            }
+            $this->current_request_time = time();
+            $_SESSION['request_time'] = $this->current_request_time;
+            $this->time_delta = $this->current_request_time - $this->last_request_time;
+            // SERVER SIDE lOG OUT AFTER 15 MINUTES
+            if($this->time_delta / 60 > 15 ){
+                $this->logout();
+                redirect_to(WEB_ROOT."/admin/login.php");
+            }
+                
         } else {
             unset($this->user_id);
             $this->logged_in = false;

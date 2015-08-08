@@ -1,7 +1,7 @@
 <?php
 require_once ("../../private/initialize.php");
 
-if($session->is_logged_in()) { redirect_to("index.php");}
+if($session->is_logged_in()) { redirect_to(WEB_ROOT."/admin/index.php");}
 // Remember to give your form's sumit tag a name="submit" attribute!
 if(isset($_POST['submit'])) {
     $username = trim($_POST['username']);
@@ -17,7 +17,7 @@ if(isset($_POST['submit'])) {
         logger($level = "Login", $msg = $found_user->username . " logged in.");
         $_SESSION["admin_id"] = $found_user->id;
         $_SESSION["username"] = $found_user->username;
-        redirect_to("index.php");
+        redirect_to(WEB_ROOT."/admin/index.php");
     } else {
         // username/password combo was not found in the database
         $message = "Username/password combination is incorrect.";

@@ -16,5 +16,5 @@ include template_path("session_message.php");
 		<p>Sorry we can not find the page you were looking for</p>
 	    </div>
 	</div>
-<?php } else {echo $session->message;}?>
+<?php } else {echo "There was an error " . $session->message;}?>
 <?php include template_path("footer.php");?>

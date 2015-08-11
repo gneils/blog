@@ -30,6 +30,15 @@ class DatabaseObject {
         $row = $database->fetch_array($result_set);
         return array_shift($row);
     }
+    
+    public static function count_subset($sql_where = " where id = 0 ") {
+        global $database;
+        $sql = "SELECT COUNT(*) FROM " . static::$table_name. " ";
+        $sql .= $sql_where;
+        $result_set = $database->query($sql);
+        $row = $database->fetch_array($result_set);
+        return array_shift($row);
+    }
 
     private static function instantiate($record) {
         // could check that $record exists and is an array 

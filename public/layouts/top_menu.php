@@ -30,6 +30,7 @@
               <ul class="dropdown-menu" aria-labelledby="drop1">
                 <li><a href="<?php echo WEB_ROOT?>/admin/new_post.php">New Post</a></li>
                 <li><a href="<?php echo WEB_ROOT?>/admin/list_posts.php">List Posts</a></li>
+                <li><a href="<?php echo WEB_ROOT?>/admin/search.php">Search Posts</a></li>
                 <li role="separator" class="divider"></li>
                 <?php foreach($post_menus as $post_menu): ?>
                    <li><a href="<?php echo WEB_ROOT?>/admin/edit_post.php?pid=<?php echo $post_menu->id?>" title="<?php echo date_to_text($post_menu->event_date);?>">

@@ -1,8 +1,7 @@
 <?php require_once ("../../private/initialize.php");
-if (!$session->is_logged_in()) { redirect_to(WEB_ROOT."/admin/login.php"); }
-?>
+if (!$session->is_logged_in()) { redirect_to(WEB_ROOT."/admin/login.php"); }?>
 
-<?php 
+<?php
 if (isset($_POST["submit"])) {
     // Process the form
     $username = $database->escape_value(filter_input(INPUT_POST, "username"));

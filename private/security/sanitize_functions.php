@@ -21,4 +21,8 @@ function s($string) {
     return strip_tags($string);
 }
 
+function clean_input($string){
+    return s(trim ($string));
+}
+
 ?>

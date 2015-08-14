@@ -39,6 +39,7 @@ require_once(LIB_PATH.DS."user.php");
 require_once(LIB_PATH.DS."photograph.php");
 require_once(LIB_PATH.DS."comment.php");
 require_once(LIB_PATH.DS."post.php");
+require_once(LIB_PATH.DS."issue.php");
 
 require_once(PRIVATE_PATH . DS . "security" . DS . "validations.php");
 require_once(PRIVATE_PATH . DS . "security" . DS . "sanitize_functions.php");

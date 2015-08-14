@@ -82,6 +82,9 @@
                         echo "<li><a href=\"".WEB_ROOT."/admin/logfile.php\">Log File</a></li>";
                         echo "<li><a href=\"".WEB_ROOT."/to-do.php\">My To Do List</a></li>";
                         echo "<li role=\"separator\" class=\"divider\"></li>";
+                        echo "<li><a href=\"".WEB_ROOT."/admin/list_issues.php\">Issues</a></li>";
+                        echo "<li><a href=\"".WEB_ROOT."/admin/sandbox.php\">Sandbox</a></li>";
+                        echo "<li role=\"separator\" class=\"divider\"></li>";
                         echo "<li><a href=\"".WEB_ROOT."/admin/logout.php\">Log Out</a></li>";
                     } else {
                         echo "<li><a href=\"".WEB_ROOT."/admin/login.php\">Log In</a></li>";

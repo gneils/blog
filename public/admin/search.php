@@ -8,7 +8,7 @@ if(request_is_post()) {
         redirect_to(WEB_ROOT."/admin/search.php");
     }    
 //  Security Checks and Set Values
-    $safe_description = trim (s($database->escape_value(filter_input(INPUT_POST, "description"))));
+    $safe_description = $database->escape_value(s(trim(filter_input(INPUT_POST, "description"))));
     $fields_with_max_lengths = array("description" => 30);
     validate_max_lengths($fields_with_max_lengths);
 

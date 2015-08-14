@@ -71,7 +71,7 @@ if (isset($_POST["submit"])) {
         if ($result && $database->affected_rows() >=0) {
             // Success
             $_SESSION["message"] = "User Info Updated.";
-            redirect_to("/admin/manage_users.php?user=" . $safe_id );
+            redirect_to(WEB_ROOT."/admin/manage_users.php?user=" . $safe_id );
         } else {
             // Failure
             $message = "Sorry, user was not updated:" .$database->affected_rows();

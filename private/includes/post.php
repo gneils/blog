@@ -15,6 +15,7 @@ class Post extends DatabaseObject {
                                         'description', 
                                         'author',
                                         'tags', 
+                                        'slug', 
                                         'rating',
                                         'public',
                                         'visible');
@@ -27,6 +28,7 @@ class Post extends DatabaseObject {
     public $description;
     public $author;
     public $tags;
+    public $slug;
     public $rating;
     public $public;
     public $visible;

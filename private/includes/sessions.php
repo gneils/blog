@@ -13,9 +13,11 @@ class Session {
     public $last_request_time;
     public $current_request_time ;
     public $time_delta;
+    public $max_time_delta_minutes ;
     
     function __construct() {
         session_start();
+        $this->max_time_delta_minutes = 15;
         $this->check_login();      
         $this->check_message();
     }
@@ -24,20 +26,10 @@ class Session {
         if(isset($_SESSION['user_id'])) {
             $this->user_id = $_SESSION['user_id'];
             $this->logged_in = true;
-            if(isset( $_SESSION['request_time']  )) {
-                $this->last_request_time = $_SESSION['request_time'];
-            } else {
-                $this->last_request_time = time();                
-            }
-            $this->current_request_time = time();
-            $_SESSION['request_time'] = $this->current_request_time;
-            $this->time_delta = $this->current_request_time - $this->last_request_time;
-            // SERVER SIDE lOG OUT AFTER 15 MINUTES
-            if($this->time_delta / 60 > 15 ){
+            if ($this->check_exceeded_time_limit()) { 
                 $this->logout();
                 redirect_to(WEB_ROOT."/admin/login.php");
             }
-                
         } else {
             unset($this->user_id);
             $this->logged_in = false;
@@ -70,10 +62,9 @@ class Session {
                 $_SESSION['message'] .= $msg;
             } else {
                 $_SESSION['message'] = $msg;
-            }
-                
+            }      
         } else {
-            // then this is a "get message"
+            // then this is a "get message"           
             return $this->message;
         }
     }
@@ -82,7 +73,7 @@ class Session {
         // Is there a message stored in the session
         if(isset($_SESSION["message"])) {
             // Add it as an attribute and 
-            $this ->message = $_SESSION["message"];
+            $this->message = $_SESSION["message"];
             // clear message after use
             unset($_SESSION["message"]);
         } else {
@@ -113,9 +104,28 @@ class Session {
             return NULL;
         }
     }
+    
+    public function check_exceeded_time_limit () {
+        $this->current_request_time = time();
+        if(isset( $_SESSION['request_time']  )) {
+            $this->last_request_time = $_SESSION['request_time'];
+        } else {
+            $this->last_request_time = time();     // now for folks that just logged in           
+        }
+        $_SESSION['request_time'] = $this->current_request_time;
+        $this->time_delta = $this->current_request_time - $this->last_request_time;
+        if($this->time_delta / 60 > $this->max_time_delta_minutes ){
+            // SERVER SIDE lOG OUT
+            $this->message("You were automatically logged out.");
+            return true;
+        } else {
+            // stay logged in.
+            return false;
+        }
+
+    }
  }
 
 $session = new Session();
 $message = $session->message();
-
 ?>

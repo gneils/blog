@@ -39,9 +39,11 @@ if (isset($_POST["submit"])) {
     if(empty($errors)){
         // perform update
         $safe_id = $database->escape_value(filter_input(INPUT_POST, "pid"));
-        $safe_caption = $database->escape_value(filter_input(INPUT_POST, "caption" ) ) ;
+        $safe_caption = $database->escape_value(s(filter_input(INPUT_POST, "caption" ) ) );
+        $safe_description = $database->escape_value(s(filter_input(INPUT_POST, "description" ) ) );
         $query  = "UPDATE photographs SET ";
-        $query .= "caption = '{$safe_caption}' ";
+        $query .= "caption = '{$safe_caption}', ";
+        $query .= "description = '{$safe_description}' ";
         $query .= "WHERE id = {$safe_id} ";
         $query .= "LIMIT 1";
 
@@ -79,11 +81,16 @@ include template_path("top_menu.php");
         </div>
         <form action="<?php echo WEB_ROOT?>/admin/edit_photo.php" method="post">
             <?php echo csrf_token_tag(); ?>
-            <input type="hidden" name="pid" id="pid" maxlength="30" value="<?php echo h($photo->id);?>" /> 
+            <input type="hidden" name="pid" id="pid" value="<?php echo h($photo->id);?>" /> 
             <div class="form-group">
                 <label for="caption">Caption</label>
-                <input type="text" name="caption" id="caption" maxlength="30" class="form-control" value="<?php echo h($photo->caption);?> "/> 
+                <input type="text" name="caption" id="caption" maxlength="30" class="form-control" value="<?php echo h($photo->caption);?>"/> 
             </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" class="form-control" rows="10"><?php echo h($photo->description);?></textarea>
+            </div>
+
             <button type="submit" name="submit" value="edit-photo" class="btn btn-primary">Save</button>
             &nbsp;
             <a class="btn btn-default" href="<?php echo WEB_ROOT?>/admin/list_photos.php">Cancel</a>

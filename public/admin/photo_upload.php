@@ -37,7 +37,7 @@
             <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size;?>" />
             <div class="form-group">
                 <span class="btn btn-primary btn-file">
-                <label for="file_upload">1. Choose a photo</label>
+                <label for="file_upload">Choose a photo</label>
                     <input type="file" name="file_upload" id="file_upload" />
                 </span>
             </div>
@@ -45,7 +45,12 @@
                 <label for="caption">Caption</label>
                 <input type="text" name="caption" id="caption" maxlength="30" class="form-control" /> 
             </div>
-            <button type="submit" name="submit" value="upload" class="btn btn-primary">2. Submit</button>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" class="form-control" rows="10"><?php echo h($post->description);?></textarea>
+            </div>
+
+            <button type="submit" name="submit" value="upload" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>

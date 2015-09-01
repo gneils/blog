@@ -3,6 +3,7 @@ require_once ("../../private/initialize.php");
 
 if($session->is_logged_in()) { redirect_to(WEB_ROOT."/admin/index.php");}
 // Remember to give your form's sumit tag a name="submit" attribute!
+
 if(isset($_POST['submit'])) {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
@@ -38,6 +39,7 @@ include template_path("top_menu.php");
     <div class="col-md-offset-4 col-md-4">
     </div>
 </div>
+<?php if (isset($session->message)) {echo $session->message;}?>
 <?php echo output_message($message); ?>
 
 <div class="row">

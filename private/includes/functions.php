@@ -118,4 +118,10 @@ function date_to_text($date="") {
     return strftime("%m/%d/%Y", $unixdatetime);
 }
 
+function date_to_form_text($date="") {
+    $unixdatetime = strtotime($date);
+    return strftime("%Y-%m-%d", $unixdatetime);
+}
+
+
 ?>

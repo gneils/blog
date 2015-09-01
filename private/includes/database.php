@@ -12,7 +12,7 @@ class MySQLDatabase {
     public function open_connection() {
         $this->connection = mysqli_connect(DB_SERVER,DB_USER, DB_PASS, DB_NAME);
         if(mysqli_connect_errno()) {
-            $_SESSION['message'] = "Cannot Confirm Connection.";
+            $_SESSION['message'] = "Can not confirm connection.";
             redirect_to(WEB_ROOT."/404_error.php");
             // or this way for debug
             die("Database connection failed: " .

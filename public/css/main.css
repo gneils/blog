@@ -15,7 +15,6 @@ img {
   border: none;
 }
 
-
 a{ 
   color: #8D0D19
 }
@@ -87,4 +86,8 @@ a{
 	margin-left:15px;
 	font-size: .9em;
 	font-style:italic;
+}
+.form-group.required .control-label:after {
+  content:"*";
+  color:red;
 }

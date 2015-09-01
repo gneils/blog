@@ -5,10 +5,11 @@ if (!$session->is_logged_in()) { redirect_to(WEB_ROOT."/admin/login.php"); }
 <?php 
 if (isset($_POST["submit"])) {
     // Process the form
-    $author = s($database->escape_value(filter_input(INPUT_POST, "author")));
-    $person = s($database->escape_value(filter_input(INPUT_POST, "person")));
-    $title = s($database->escape_value(filter_input(INPUT_POST, "title")));
-    $description = s($database->escape_value(filter_input(INPUT_POST, "description")));
+    $author = $database->escape_value(s(filter_input(INPUT_POST, "author")));
+    $person = $database->escape_value(s(filter_input(INPUT_POST, "person")));
+    $title = $database->escape_value(s(filter_input(INPUT_POST, "title")));
+    $description = $database->escape_value(s(filter_input(INPUT_POST, "description")));
+    $tags = $database->escape_value(s(filter_input(INPUT_POST, "tags")));
     
     $event_date = filter_input(INPUT_POST, "event_date");
     $sqlDate = date('Y-m-d', strtotime($event_date));    
@@ -31,13 +32,14 @@ if (isset($_POST["submit"])) {
     }
     
     $query  = "INSERT INTO posts (";
-    $query .= " author, person, title, event_date, description";
+    $query .= " author, person, title, event_date, description, tags";
     $query .= ") VALUES (";
     $query .= " '{$author}',";
     $query .= " '{$person}',";
     $query .= " '{$title}',";
     $query .= " '{$sqlDate}', ";
-    $query .= " '{$description}'";
+    $query .= " '{$description}', ";
+    $query .= " '{$tags}'";
     $query .= ")";
 
     $result = $database->query( $query );

@@ -5,7 +5,7 @@
 if(request_is_post()) {
     if(!csrf_token_is_valid()) {
         $session->message("CSRF TOKEN MISSING OR MISMATCHED");
-        redirect_to(WEB_ROOT."/404_error.php");
+        redirect_to(WEB_ROOT ."/404_error.php");
     }    
     $post = Post::find_by_id($_POST["pid"]);
 } else {
@@ -41,12 +41,13 @@ if (isset($_POST["submit"])) {
         // perform update
         $safe_id = (int) $database->escape_value(filter_input(INPUT_POST, "pid"));
         $safe_person = $database->escape_value(s(filter_input(INPUT_POST, "person" ) ) );
-        $safe_description = s($database->escape_value(filter_input(INPUT_POST, "description" ) )) ;
+        $safe_description = $database->escape_value(s(filter_input(INPUT_POST, "description" ) )) ;
         $safe_title = $database->escape_value(s(filter_input(INPUT_POST, "title" ) ) );
-        $safe_visible = $database->escape_value(filter_input(INPUT_POST, "visible" ) ) ;
+        $safe_visible = $database->escape_value(s(filter_input(INPUT_POST, "visible" ) ) );
         $safe_public = $database->escape_value(filter_input(INPUT_POST, "public" ) ) ;
         $safe_author = $database->escape_value(s(filter_input(INPUT_POST, "author" ) )) ;
         $safe_tags = $database->escape_value(s(filter_input(INPUT_POST, "tags" ) )) ;
+        $safe_slug = $database->escape_value(s(filter_input(INPUT_POST, "slug" ) )) ;
         $query  = "UPDATE posts SET ";
         $query .= "person= '{$safe_person}', ";
         $query .= "title = '{$safe_title}', ";
@@ -58,7 +59,8 @@ if (isset($_POST["submit"])) {
         if ($safe_public == 1 || $safe_public == 0) {
             $query .= "public = '{$safe_public}', ";
         }
-        $query .= "tags = '{$safe_tags}' ";
+        $query .= "tags = '{$safe_tags}', ";
+        $query .= "slug = '{$safe_slug}' ";
         $query .= "WHERE id = {$safe_id} ";
         $query .= "LIMIT 1";
 
@@ -108,17 +110,17 @@ include template_path("top_menu.php");
                     ?>
                 </select>
             </div>
-            <div class="form-group">
-                <label for="event_date">Date</label>
-                <input type="date" name="event_date" id="event_date" class="form-control" value="<?php echo h($post->event_date);?>"/> 
-            </div>
-            <div class="form-group">
-                <label for="title">title</label>
+            <div class="form-group required">
+                <label for="title" class="control-label">title</label>
                 <input type="text" name="title" id="title"  maxlength="100" class="form-control" value="<?php echo h($post->title);?>"/> 
             </div>
-            <div class="form-group">
-                <label for="description">Description</label>
+            <div class="form-group required">
+                <label for="description" class="control-label">Description</label>
                 <textarea name="description" id="description" class="form-control" rows="10"><?php echo h($post->description);?></textarea>
+            </div>
+            <div class="form-group required">
+                <label for="event_date" class="control-label">Date</label>
+                <input type="date" name="event_date" id="event_date" class="form-control" value="<?php echo date_to_form_text($post->event_date);?>"/> 
             </div>
             <div class="form-group">
                 <label for="author">Author</label>
@@ -153,6 +155,10 @@ include template_path("top_menu.php");
             <div class="form-group">
                 <label for="tags">Tags</label>
                 <input type="text" name="tags" id="tags" maxlength="300" class="form-control" value="<?php echo h($post->tags);?>"/> 
+            </div>
+            <div class="form-group">
+                <label for="slug">Slug</label>
+                <input type="text" name="slug" id="slug" maxlength="100" class="form-control" value="<?php echo h($post->slug);?>"/> 
             </div>
             <button type="submit" name="submit" value="edit-post" class="btn btn-primary">Save</button>
             &nbsp;

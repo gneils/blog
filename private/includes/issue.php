@@ -8,26 +8,37 @@ class Issue extends DatabaseObject {
     
     protected static $table_name = "issues";
     protected static $db_fields = array('id', 
-                                        'description', 
                                         'created', 
                                         'updated',
-                                        'status',
+                                        'description', 
+                                        'submitted_by',
+                                        'curr_status',
+                                        'resolution',
                                         );
     public $id;
-    public $description;
     public $created;
     public $updated;
-    public $status;
+    public $description;
+    public $submitted_by;
+    public $curr_status;
+    public $resolution;
     
     // "new" is a keyword so you can't use it here 
-    public static function make($post_id, $author="Anonymous", $description="",$status="Open") {
-        if(!empty($post_id) && !empty($author) && !empty($body)){
-            $post = new Post();
-            $post->post_id = (int) $post_id;
-            $post->created = strftime("%Y-%m-%d %H:%M:%S", time());
-            $post->body = $description;
-            $post->status = $status;
-            return $post;
+    public static function make($id, 
+                                $description="",
+                                $submitted_by="anon",
+                                $curr_status="Open"
+                                ) {
+        if(!empty($issue_id) && !empty($author) && !empty($body)){
+            $issue = new Issue();
+            $issue->issue_id = (int) $issue_id;
+            $issue->created = strftime("%Y-%m-%d %H:%M:%S", time());
+            $issue->updated = strftime("%Y-%m-%d %H:%M:%S", time());
+            $issue->description = $description;
+            $issue->curr_status = $curr_status;
+            $issue->resolution = $resolution;
+            
+            return $issue;
         } else {
             return false;
         }

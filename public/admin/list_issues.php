@@ -46,16 +46,21 @@ include template_path("top_menu.php");
     <div class="col-md-12">
         <table class="table table-striped">
             <caption>Issues</caption>
-            <tr><th>Description</th>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
                 <th>Date Submitted</th>
                 <th>Last Updated</th>
+                <th>Status</th>
                 <th colspan="2">Action</th>
             </tr>
             <?php foreach($issues as $issue): ?>
                 <tr>
+                <td><?php echo h($issue->id); ?></td>
                 <td><?php echo h($issue->description); ?></td>
                 <td><?php echo date_to_text($issue->created); ?></td>
                 <td><?php echo date_to_text($issue->updated); ?></td>
+                <td><?php echo h($issue->curr_status); ?></td>
                 <td><a href="<?php echo WEB_ROOT?>/admin/edit_issue.php?id=<?php echo $issue->id?>">Edit</a></td>
                 <td><a href="<?php echo WEB_ROOT?>/admin/delete_issue.php?id=<?php echo $issue->id?>" onclick="return confirm ('Are you sure?');">Delete</a></td>
                 </tr>

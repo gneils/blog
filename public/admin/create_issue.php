@@ -5,7 +5,9 @@ if (!$session->is_logged_in()) { redirect_to(WEB_ROOT."/admin/login.php"); }
 <?php 
 if (isset($_POST["submit"])) {
     // Process the form
-    $description = s($database->escape_value(filter_input(INPUT_POST, "description")));
+    $description = $database->escape_value(s(filter_input(INPUT_POST, "description")));
+    $curr_status = $database->escape_value(s(filter_input(INPUT_POST, "status")));
+    $resolution = $database->escape_value(s(filter_input(INPUT_POST, "resolution")));
     // validations
     $required_fields = array("description");
     validate_presences($required_fields);
@@ -22,9 +24,13 @@ if (isset($_POST["submit"])) {
     }
     
     $query  = "INSERT INTO issues (";
-    $query .= " description";
+    $query .= " description,";
+    $query .= " curr_status,";
+    $query .= " resolution";
     $query .= ") VALUES (";
-    $query .= " '{$description}'";
+    $query .= " '{$description}', ";
+    $query .= " '{$curr_status}', ";
+    $query .= " '{$resolution}'";
     $query .= ")";
 
     $result = $database->query( $query );

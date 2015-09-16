@@ -32,7 +32,6 @@ if(request_is_post()) {
     }
 ?>
 
-
 <?php 
 if (isset($_POST["submit"])) {
     // Process the form
@@ -45,14 +44,23 @@ if (isset($_POST["submit"])) {
     $fields_with_min_lengths = array("description" => 2);
     validate_min_lengths($fields_with_min_lengths);
     
+    $valid_stats_options = ["Open","Closed"];
+            
+    $result = has_inclusion_in(filter_input(INPUT_POST, "status" ), $valid_stats_options);
+    if (!$result) {
+        $errors["Status"] = "Status is invalid.";
+    }
+    
     if(empty($errors)){
         // perform update
         $safe_id = $database->escape_value(filter_input(INPUT_POST, "id"));
         $safe_description = $database->escape_value(s(filter_input(INPUT_POST, "description" )) ) ;
         $safe_status = $database->escape_value(s(filter_input(INPUT_POST, "status" ) ) ) ;
+        $safe_resolution = $database->escape_value(s(filter_input(INPUT_POST, "resolution" ) ) ) ;
         $query  = "UPDATE issues SET ";
         $query .= "description = '{$safe_description}', ";
-        $query .= "status = '{$safe_status}' ";
+        $query .= "curr_status = '{$safe_status}', ";
+        $query .= "resolution = '{$safe_resolution}' ";
         $query .= "WHERE id = {$safe_id} ";
         $query .= "LIMIT 1";
 
@@ -93,7 +101,14 @@ include template_path("top_menu.php");
             </div>
             <div class="form-group">
                 <label for="status">Status</label>
-                <input type="text" name="status" id="status" maxlength="15" class="form-control" value="<?php echo h($current_issue->status);?> "/> 
+                <select name="status" id="status" class="form-control"> 
+                    <option value="Open" <?php if($current_issue->curr_status == "Open") {echo "selected";}?>>Open</option>
+                    <option value="Closed" <?php if($current_issue->curr_status == "Closed") {echo "selected";}?>>Closed</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="resolution">Resolution</label>
+                <textarea name="resolution" id="resolution"  class="form-control" rows="5"><?php echo h($current_issue->resolution);?></textarea>
             </div>
             <input type="submit" name="submit" class="btn btn-primary" value="Update Issue" />
             &nbsp;

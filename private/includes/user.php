@@ -4,7 +4,7 @@ require_once (PRIVATE_PATH.DS.'includes'.DS.'database.php');
 class User extends DatabaseObject {
     
     protected static $table_name = "users";
-    protected static $db_fields = array('id', 'username', 'password', 'first_name', 'last_name', 'email');
+    protected static $db_fields = array('id', 'username', 'password', 'first_name', 'last_name', 'email','super_user');
     
     public $id;
     public $username;
@@ -12,6 +12,7 @@ class User extends DatabaseObject {
     public $first_name;
     public $last_name;
     public $email;
+    public $super_user;
 
     
     public function full_name() {
@@ -33,8 +34,6 @@ class User extends DatabaseObject {
         $sql .= "WHERE username = '{$username}' ";
         $sql .= "LIMIT 1";
         $result_array = self::find_by_sql($sql);
-       
-        
         if (empty($result_array)) {
             return false;
         }

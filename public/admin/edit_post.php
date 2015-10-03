@@ -104,7 +104,6 @@ include template_path("top_menu.php");
                         foreach ($persons as $person) {
                             echo "<option value=\"".$person."\"";
                             if ($post->person == $person) { echo " selected";}
-                            
                             echo ">".$person."</option>";
                         }
                     ?>

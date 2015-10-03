@@ -100,7 +100,6 @@ class DatabaseObject {
            // Fallback only when there is no database connection available. 
            return addslashes($string);
         }
-    }
-    
+    }   
 }
 ?>

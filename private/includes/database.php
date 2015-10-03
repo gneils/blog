@@ -74,6 +74,35 @@ class MySQLDatabase {
     public function prepare($sql) {      
         return mysqli_prepare($this->connection, $sql);
     }
+    
+    public function table_checksum($table_name) {
+        global $database;
+        $sql = 'SHOW TABLES LIKE "'. $table_name . '"';
+        $result_set = $database->query($sql);      
+        $num_rows = $database->num_rows($result_set);
+        if ($num_rows < 1 ){
+            return false;
+        } else {
+            $sql = "CHECKSUM TABLE `". $table_name . "`";
+            $result_set = $database->query($sql);      
+            $row = $database->fetch_array($result_set);
+            return $row["Checksum"];
+        }
+    }
+      public function describe_table($table_name) {
+        global $database;
+        $sql = 'SHOW TABLES LIKE "'. $table_name . '"';
+        $result_set = $database->query($sql);      
+        $num_rows = $database->num_rows($result_set);
+        if ($num_rows < 1 ){
+            return false;
+        } else {
+            $sql = "DESCRIBE TABLE `". $table_name . "`";
+            $result_set = $database->query($sql);      
+            return $result_set ;
+        }
+    }
+    
 }
 
 $database = new MySQLDatabase();

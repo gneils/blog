@@ -68,7 +68,7 @@ if (isset($_POST["submit"])) {
         $result = $database->query( $query );
         if ($result && $database->affected_rows() >=0) {
             // Success
-            $_SESSION["message"] = "Issue Info Updated.".$query;
+            $_SESSION["message"] = "Issue Info Updated.";
             redirect_to(WEB_ROOT."/admin/list_issues.php?id=" . $safe_id );
         } else {
             // Failure

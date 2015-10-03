@@ -75,14 +75,17 @@
               <ul class="dropdown-menu" aria-labelledby="drop3">
                 <?php 
                     if ($session->is_logged_in()) { 
+                        if(isset($session->user_id)) {
+                            echo "<li><a href=\"".WEB_ROOT."/admin/update_password.php\">Change Password</a></li>";
+                        }
                         echo "<li><a href=\"".WEB_ROOT."/admin/dashboard.php\">Dashboard</a></li>";
                         echo "<li><a href=\"".WEB_ROOT."/admin/manage_users.php\">Manage Users</a></li>";
                         echo "<li><a href=\"".WEB_ROOT."/admin/create_user.php\">New  User</a></li>";
                         echo "<li role=\"separator\" class=\"divider\"></li>";
                         echo "<li><a href=\"".WEB_ROOT."/admin/logfile.php\">Log File</a></li>";
-                        echo "<li><a href=\"".WEB_ROOT."/to-do.php\">My To Do List</a></li>";
                         echo "<li role=\"separator\" class=\"divider\"></li>";
                         echo "<li><a href=\"".WEB_ROOT."/admin/list_issues.php\">Issues</a></li>";
+                        echo "<li><a href=\"".WEB_ROOT."/admin/list_table_checksums.php\">Table Checksums</a></li>";
                         echo "<li><a href=\"".WEB_ROOT."/admin/sandbox.php\">Sandbox</a></li>";
                         echo "<li role=\"separator\" class=\"divider\"></li>";
                         echo "<li><a href=\"".WEB_ROOT."/admin/logout.php\">Log Out</a></li>";

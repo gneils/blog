@@ -48,21 +48,26 @@ if (isset($_POST["submit"])) {
     
     $email_fields = array("email");
     validate_emails($email_fields);
+    
+    $safe_super_user = filter_input(INPUT_POST,"super_user", FILTER_SANITIZE_NUMBER_INT );
+    if (!has_inclusion_in($safe_super_user, [0,1])) {
+        $safe_super_user = 0;
+    }
 
     if(empty($errors)){
         // perform update
-        $safe_id = $database->escape_value(filter_input(INPUT_POST, "user"));
-        $safe_username = $database->escape_value(filter_input(INPUT_POST, "username" ) ) ;
-        $safe_last_name = $database->escape_value(filter_input(INPUT_POST, "last_name" ) ) ;
-        $safe_first_name = $database->escape_value(filter_input(INPUT_POST, "first_name" ) ) ;
-        $hashed_password  = password_encrypt( filter_input(INPUT_POST, "password" ))  ;
-        $safe_email    = $database->escape_value(filter_input(INPUT_POST, "email" ) ) ;
+        $safe_id = $database->escape_value(filter_input(INPUT_POST, "user", FILTER_SANITIZE_NUMBER_INT));
+        $safe_username    = $database->escape_value(s(filter_input(INPUT_POST, "username" ) ) );
+        $safe_last_name   = $database->escape_value(s(filter_input(INPUT_POST, "last_name" ) ) ) ;
+        $safe_first_name  = $database->escape_value(s(filter_input(INPUT_POST, "first_name" ) ) );
+        $safe_email       = $database->escape_value(filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL ) ) ;
+
         $query  = "UPDATE users SET ";
         $query .= "username = '{$safe_username}', ";
-        $query .= "password = '{$hashed_password}', ";
         $query .= "last_name = '{$safe_last_name}', ";
         $query .= "first_name = '{$safe_first_name}', ";
-        $query .= "email = '{$safe_email}' ";
+        $query .= "email = '{$safe_email}', ";
+        $query .= "super_user = {$safe_super_user} ";
         $query .= "WHERE id = {$safe_id} ";
         $query .= "LIMIT 1";
 
@@ -104,21 +109,34 @@ include template_path("top_menu.php");
                 <input type="text" readonly name="username" id="username" maxlength="30" class="form-control" value="<?php echo h($current_user->username);?>" /> 
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" maxlength="30" class="form-control" value="" /> 
-            </div>
-            <div class="form-group">
                 <label for="first_name">First Name</label>
-                <input type="text" name="first_name" id="last_name" maxlength="30" class="form-control" value="" /> 
+                <input type="text" name="first_name" id="last_name" maxlength="30" class="form-control" value="<?php echo h($current_user->first_name);?>" /> 
             </div>
             <div class="form-group">
                 <label for="last_name">Last Name</label>
-                <input type="text" name="last_name" id="last_name" maxlength="30" class="form-control" value="" /> 
+                <input type="text" name="last_name" id="last_name" maxlength="30" class="form-control" value="<?php echo h($current_user->last_name);?>" /> 
             </div>
 
             <div class="form-group">
                 <label for="email">email</label>
                 <input type="text" name="email" maxlength="70" class="form-control" value="<?php echo s(h($current_user->email))?>" />
+            </div>
+            
+            <div class="form-group">
+                <label for="super_user">Super User?</label>
+                <select name="super_user" id="super_user" class="form-control"> 
+                    <?php 
+                            $output =  '<option value="0" ';    
+                            if ($current_user->super_user) { $output .= " selected";}
+                            $output .=  '>No</option>';    
+                            echo $output;
+                            
+                            $output =  '<option value="1" ';    
+                            if ($current_user->super_user) { $output .= " selected";}
+                            $output .=  '>Yes</option>';    
+                            echo $output;
+                    ?>
+                </select>
             </div>
             <input type="submit" name="submit" class="btn btn-primary" value="Update User" />
             &nbsp;

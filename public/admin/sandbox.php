@@ -21,18 +21,10 @@ include template_path("top_menu.php");
     <div class="col-md-12">
         <h3>Place you code below:</h3> 
 <?php 
-$x=1;
-$reverse = 0;
- while($x<=1025 && $x>=1)
-{
-    echo $x.'<br>';
-    if($x == 1024){ $reverse= 1;}
-    if($reverse == 0) {
-        $x=$x*2;
-    } else {
-        $x=$x/2;       
+    if(isset($_GET["x"])) {
+        echo "X was set to: " . $_GET["x"] . "<hr>";
+        echo "After sanitized: " .     $email = filter_input(INPUT_GET, "x", FILTER_SANITIZE_EMAIL);
     }
-}
 ?>
     </div>
 </div>

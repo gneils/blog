@@ -72,22 +72,26 @@ a{
 }
 
 .comment {
-	margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 .author{
-	font-family: Georgia;
-	font-size: 1.3em;
-	line-height:1.3em;
+  font-family: Georgia;
+  font-size: 1.3em;
+  line-height:1.3em;
 }
 .comment .body, .comment .actions{
-	margin-left:15px;
+  margin-left:15px;
 }
 .comment .meta-info{
-	margin-left:15px;
-	font-size: .9em;
-	font-style:italic;
+  margin-left:15px;
+  font-size: .9em;
+  font-style:italic;
 }
 .form-group.required .control-label:after {
   content:"*";
   color:red;
+}
+
+.pagination {
+  margin: 0px;
 }

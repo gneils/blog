@@ -41,9 +41,13 @@ if (isset($_POST["submit"])) {
         $safe_id = $database->escape_value(filter_input(INPUT_POST, "pid"));
         $safe_caption = $database->escape_value(s(filter_input(INPUT_POST, "caption" ) ) );
         $safe_description = $database->escape_value(s(filter_input(INPUT_POST, "description" ) ) );
+        $photo_date = s(filter_input(INPUT_POST, "photo_date"));
+        $sqlDate = date('Y-m-d', strtotime($photo_date));    
+
         $query  = "UPDATE photographs SET ";
         $query .= "caption = '{$safe_caption}', ";
-        $query .= "description = '{$safe_description}' ";
+        $query .= "description = '{$safe_description}', ";
+        $query .= "photo_date = '{$sqlDate}' ";
         $query .= "WHERE id = {$safe_id} ";
         $query .= "LIMIT 1";
 
@@ -77,7 +81,7 @@ include template_path("top_menu.php");
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <div class ="text-center">
-        <img src="<?php echo WEB_ROOT."/".h($photo->image_path()); ?>" width="320" alt="<?php echo $photo->filename; ?>"/>
+        <img src="<?php echo WEB_ROOT."/".h($photo->image_path()); ?>" width="320" alt="<?php echo h($photo->filename); ?>"/>
         </div>
         <form action="<?php echo WEB_ROOT?>/admin/edit_photo.php" method="post">
             <?php echo csrf_token_tag(); ?>
@@ -90,7 +94,14 @@ include template_path("top_menu.php");
                 <label for="description">Description</label>
                 <textarea name="description" id="description" class="form-control" rows="10"><?php echo h($photo->description);?></textarea>
             </div>
+            <div class ="row">
+                
+                <div class="form-group col-xs-4 ">
+                    <label for="photo_date" class="control-label">Date photo taken</label>
 
+                    <input type="date" name="photo_date" id="photo_date" class="form-control" value="<?php echo date_to_form_text($photo->photo_date);?>" /> 
+                </div>
+            </div>
             <button type="submit" name="submit" value="edit-photo" class="btn btn-primary">Save</button>
             &nbsp;
             <a class="btn btn-default" href="<?php echo WEB_ROOT?>/admin/list_photos.php">Cancel</a>

@@ -32,7 +32,7 @@ class Post extends DatabaseObject {
     public $rating;
     public $public;
     public $visible;
-
+    public $nav;
     
     // "new" is a keyword so you can't use it here 
     public static function make($post_id, $author="Anonymous", $body="") {

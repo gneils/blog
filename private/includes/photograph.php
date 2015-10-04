@@ -7,7 +7,7 @@ require_once(PRIVATE_PATH . DS . "includes" . DS . "database_object.php");
 class Photograph extends DatabaseObject {
     
     protected static $table_name = "photographs";
-    protected static $db_fields = array('id', 'filename', 'type', 'size', 'caption', 'description', 'public', 'upload_time', 'username');
+    protected static $db_fields = array('id', 'filename', 'type', 'size', 'caption', 'description', 'username', 'photo_date');
     protected static $allowed_ext = array('image/jpg', 'image/jpeg', 'image/gif', 'image/png');
     public $id;
     public $filename;
@@ -15,9 +15,11 @@ class Photograph extends DatabaseObject {
     public $size;
     public $caption;
     public $description;
-    public $public;
-    public $upload_time;
+//    public $public;
+//    public $upload_time;
     public $username;
+    public $photo_date;
+    public $nav;
            
     
     private   $temp_path;
@@ -90,7 +92,7 @@ class Photograph extends DatabaseObject {
                 return false;
             }
             // Determine the target_path
-            $target_path = APP_ROOT.DS. 'public'.DS.$this->upload_dir .DS. $this->filename;
+            $target_path = PUBLIC_PATH.DS.$this->upload_dir .DS. $this->filename;
             
             // Make sure a file doesn't already exist in the target location
             if(file_exists($target_path)) {

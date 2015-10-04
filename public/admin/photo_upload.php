@@ -2,11 +2,15 @@
 <?php if (!$session->is_logged_in()) {redirect_to(WEB_ROOT."/admin/login.php"); } ?>
 <?php // \php_error\reportErrors();?>
 
-<?php $max_file_size = 1048576 * 16; // expressed in bytes
+<?php 
+    $max_file_size = 1048576 * 16; // expressed in bytes
     $message = "";
     if(isset($_POST['submit'])) {
         $photo = new Photograph();
-        $photo->caption = $_POST['caption'];
+        $photo->caption = s($_POST['caption']);
+        $photo->description = s($_POST['description']);
+        $photo->photo_date = s(filter_input(INPUT_POST, "photo_date"));
+        $photo->photo_date = date('Y-m-d', strtotime($photo->photo_date)); 
         $photo->attach_file($_FILES['file_upload']);
         if($photo->save()) {
             $session->message("Photograph uploaded successfully.");
@@ -47,9 +51,16 @@
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea name="description" id="description" class="form-control" rows="10"><?php echo h($post->description);?></textarea>
+                <textarea name="description" id="description" class="form-control" rows="10"></textarea>
             </div>
+            <div class="form-group">
+                <label for="photo_date" class="control-label">Date photo taken</label>
+                  <div class="col-md-2">
 
+                <input type="date" name="photo_date" id="photo_date" class="form-control" value="" /> 
+                
+                  </div>
+            </div>
             <button type="submit" name="submit" value="upload" class="btn btn-primary">Submit</button>
         </form>
     </div>

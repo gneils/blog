@@ -1,12 +1,49 @@
 <?php
+//  Get
     $sql = "SELECT * FROM posts ";
     $sql .= "ORDER BY event_date DESC ";
     $sql .= "LIMIT 10 ";
     $post_menus = Post::find_by_sql($sql);
+    $max_menu_title_legnth = 25;
+    
+// create menu item nav
+    foreach($post_menus as $post_menu){
+        if (strlen( $post_menu->title) > 3 ) {
+            $post_menu->nav = $post_menu->title;
+        } elseif(strlen ($post_menu->description) > 3) {
+            $post_menu->nav = $post_menu->description;
+        } else {
+            $post_menu->nav = 'Click Me' ;
+        }
+    }
+            
+    // Clean menu items and prepare for output
+    foreach ($post_menus as $post_menu) {
+        if(strlen ($post_menu->nav) >= $max_menu_title_legnth) {
+            $post_menu->nav = substr($post_menu->nav,0,$max_menu_title_legnth). "...";
+        }    
+    }
+    
     $sql = "SELECT * FROM photographs ";
     $sql .= "ORDER BY upload_time DESC ";
     $sql .= "LIMIT 10 ";
     $photo_menus = Photograph::find_by_sql($sql);
+    
+    // create menu item nav
+    foreach($photo_menus as $photo_menu){
+        if (strlen( $photo_menu->caption) > 3 ) {
+            $photo_menu->nav = $photo_menu->caption;
+        } else {
+            $photo_menu->nav = $photo_menu->filename;
+        }
+    }
+            
+    // Clean menu items and prepare for output
+    foreach ($photo_menus as $photo_menu) {
+        if(strlen ($photo_menu->nav) >= $max_menu_title_legnth) {
+            $photo_menu->nav = substr($photo_menu->nav,0,$max_menu_title_legnth). "...";
+        }    
+    }
 ?>
 <div class="row">
     <nav id="navbar-example" class="navbar navbar-default navbar-static">
@@ -33,12 +70,9 @@
                 <li><a href="<?php echo WEB_ROOT?>/admin/search.php">Search Posts</a></li>
                 <li role="separator" class="divider"></li>
                 <?php foreach($post_menus as $post_menu): ?>
-                   <li><a href="<?php echo WEB_ROOT?>/admin/edit_post.php?pid=<?php echo $post_menu->id?>" title="<?php echo date_to_text($post_menu->event_date);?>">
-                       <?php if(strlen (h($post_menu->title)) > 5) {
-                       echo h(substr($post_menu->title,0,25));
-                       } else  {
-                        echo h(substr($post_menu->description,0,25)); 
-                       }?>
+                   <li><a href="<?php echo WEB_ROOT?>/admin/edit_post.php?pid=<?php echo $post_menu->id?>" 
+                          title="<?php echo date_to_text($post_menu->event_date);?>">
+                        <?php echo h($post_menu->nav);?>
                        </a>
                    </li>
                 <?php endforeach; ?>
@@ -55,11 +89,7 @@
                 <li role="separator" class="divider"></li>
                 <?php foreach($photo_menus as $photo_menu): ?>
                    <li><a href="<?php echo WEB_ROOT?>/admin/edit_photo.php?pid=<?php echo $photo_menu->id?>" >
-                       <?php if(strlen ($photo_menu->caption) > 5) {
-                       echo h(substr($photo_menu->caption,0,25));
-                       } else  {
-                        echo h($photo_menu->filename); 
-                       }?>
+                       <?php echo h($photo_menu->nav);?>
                        </a>
                    </li>
                 <?php endforeach; ?>

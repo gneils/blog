@@ -30,7 +30,11 @@ include template_path("top_menu.php");
             <tr><th>Image</th><th>Name</th><th>Caption</th><th>Type</th><th>size</th><th>Comments</th><th colspan="2">Action</th></tr>
             <?php foreach($photo_objects as $photo): ?>
                 <tr>
-                <td><img src="<?php echo WEB_ROOT."/".h($photo->image_path()); ?>" width="100" alt="<?php echo $photo->filename; ?>"/></td>
+                    <td>
+                        <a href="<?php echo WEB_ROOT?>/admin/edit_photo.php?pid=<?php echo $photo->id?>">
+                            <img src="<?php echo WEB_ROOT."/".h($photo->image_path()); ?>" width="100" alt="<?php echo $photo->filename; ?>"/>
+                        </a>
+                    </td>
                 <td><?php echo $photo->filename; ?></td>
                 <td><?php echo $photo->caption; ?></td>
                 <td><?php echo $photo->type; ?></td>

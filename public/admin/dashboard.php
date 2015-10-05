@@ -11,7 +11,9 @@ if (!$session->is_logged_in()) { redirect_to(WEB_ROOT."/admin/login.php"); }
         <h2>Admin Dashboard</h2>
     </div>
 </div>
-    
+<div class="row">
+    <div class="col-xs-12" style="height:20px;"></div>
+</div>
 <div class="row">
     <div class="col-md-12">
         <div id="page">
@@ -20,11 +22,6 @@ if (!$session->is_logged_in()) { redirect_to(WEB_ROOT."/admin/login.php"); }
                 <a href="<?php echo WEB_ROOT?>/admin/manage_users.php" class="btn btn-default">Mange Users</a>
                 <a href="<?php echo WEB_ROOT?>/admin/logout.php" class="btn btn-default">logout</a>
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        
     </div>
 </div>
 <?php include template_path("footer.php");?>

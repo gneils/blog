@@ -33,7 +33,6 @@
         $link_vars .= "&amp;s=DESC";
     }   
     
-
     // 2. records per page ($per_page)
     $per_page = $config['perpage'];
             
@@ -114,12 +113,13 @@ include template_path("top_menu.php");
     </div>
     <?php endif ?>   
 </div>
-<br />
+<div class="row">
+    <div class="col-xs-12" style="height:20px;"></div>
+</div>
 
 <div class="row">
     <div class="col-md-12">
         <table class="table table-striped">
-            <caption>Issues</caption>
             <tr>
                 <th><a href="<?php echo WEB_ROOT?>/admin/list_issues.php?ob=id">ID<?php echo $sortarrow;?></a></th>
                 <th><a href="<?php echo WEB_ROOT?>/admin/list_issues.php?ob=description">Description</th>
@@ -142,6 +142,4 @@ include template_path("top_menu.php");
         </table>        
     </div>
 </div>
-
-
 <?php include template_path("footer.php");?>

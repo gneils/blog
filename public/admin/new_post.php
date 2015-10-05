@@ -49,11 +49,6 @@ $persons = Post::get_all_persons();
             <p>Placeholder for rating</p>
             <a href="<?php echo WEB_ROOT?>/admin/manage_posts.php" class="btn btn-default">Cancel</a>
         </form>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
     </div>
 </div>
 

@@ -12,7 +12,7 @@ if (isset($_POST["submit"])) {
     $required_fields = array("description");
     validate_presences($required_fields);
     
-    $fields_with_max_lengths = array("description" => 6000,);
+    $fields_with_max_lengths = array("description" => 900,);
     validate_max_lengths($fields_with_max_lengths);
    
     $fields_with_min_lengths = array("description" => 5,); 

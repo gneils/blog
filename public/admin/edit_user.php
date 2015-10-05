@@ -96,10 +96,13 @@ include template_path("top_menu.php");
     if (!empty($message)) {echo "<div class=\"message\">" . h($message) . "</div>";}
 ?>
 <?php if(isset($errors)) {echo form_errors($errors);}?>
-
+<div class="row">
+    <div class="col-md-12">
+        <h2>Edit <?php echo h($current_user->username)?></h2>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-10 col-md-offset-1"
-         <h2>User: <?php echo h($current_user->username)?></h2></br></br></br>
             <form action="<?php echo WEB_ROOT?>/admin/edit_user.php" method="post">
             <?php echo csrf_token_tag(); ?>
             <input type="hidden" name="user" id="user" maxlength="30" value="<?php echo h($current_user->id);?>" /> 
@@ -147,7 +150,4 @@ include template_path("top_menu.php");
         <br />
     </div>
 </div>
-<br />
-<br />
-
 <?php include template_path("footer.php"); ?>

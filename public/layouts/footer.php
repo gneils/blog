@@ -1,3 +1,6 @@
+        <div class="row">
+            <div class="col-xs-12" style="height:20px;"></div>
+        </div>
         <div id="footer" class="row">
             <div class="col-md-12">
                 Copyright <?php echo date("Y");?>, Datagold

@@ -95,10 +95,8 @@ include template_path("top_menu.php");
                 <textarea name="description" id="description" class="form-control" rows="10"><?php echo h($photo->description);?></textarea>
             </div>
             <div class ="row">
-                
                 <div class="form-group col-xs-4 ">
                     <label for="photo_date" class="control-label">Date photo taken</label>
-
                     <input type="date" name="photo_date" id="photo_date" class="form-control" value="<?php echo date_to_form_text($photo->photo_date);?>" /> 
                 </div>
             </div>
@@ -111,7 +109,4 @@ include template_path("top_menu.php");
         <br />
     </div>
 </div>
-<br />
-<br />
-
 <?php include template_path("footer.php"); ?>

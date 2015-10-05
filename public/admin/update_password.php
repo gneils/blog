@@ -95,7 +95,4 @@ include template_path("top_menu.php");
         <br />
     </div>
 </div>
-<br />
-<br />
-
 <?php include template_path("footer.php"); ?>

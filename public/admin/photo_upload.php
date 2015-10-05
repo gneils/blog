@@ -53,19 +53,16 @@
                 <label for="description">Description</label>
                 <textarea name="description" id="description" class="form-control" rows="10"></textarea>
             </div>
-            <div class="form-group">
-                <label for="photo_date" class="control-label">Date photo taken</label>
-                  <div class="col-md-2">
-
-                <input type="date" name="photo_date" id="photo_date" class="form-control" value="" /> 
-                
-                  </div>
+            <div class ="row">
+                <div class="form-group col-xs-4 ">
+                    <label for="photo_date" class="control-label">Date photo taken</label>
+                    <input type="date" name="photo_date" id="photo_date" class="form-control" value="" /> 
+                </div>
             </div>
+
             <button type="submit" name="submit" value="upload" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>
-<br />
-<br />
-<br />
+
 <?php include template_path("footer.php");?>

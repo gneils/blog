@@ -11,8 +11,12 @@ include template_path("session_message.php");
 ?>
 <div class="row">
     <div class="col-md-12">
+        <h2>Manage Users</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
         <table class="table table-striped">
-            <caption>Manage Users</caption>
             <tr><th style="width:200px;text-align:left;">Username</th>
                 <th style="width:300px;text-align:left;">Name</th>
                 <th colspan="2" style="text-align:left;width:200px">Actions</th>
@@ -30,8 +34,4 @@ include template_path("session_message.php");
         <a href="dashboard.php" class="btn btn-default">Back to Dashboard</a>      
     </div>
 </div>
-<br>
-<br>
-
-
 <?php include template_path("footer.php");?>

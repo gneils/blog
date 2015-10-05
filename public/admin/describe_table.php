@@ -1,5 +1,5 @@
 <?php require_once ("../../private/initialize.php");?>
-<?php if (!$session->is_logged_in()) {redirect_to("/admin/login.php"); } ?>
+<?php if (!$session->is_logged_in()) {redirect_to(WEB_ROOT."/admin/login.php"); } ?>
 <?php 
 // Create Checksum for whitelisted tables
 $table_whitelist = array("comments", "issues", "photographs", "posts");
@@ -55,7 +55,6 @@ include template_path("top_menu.php");
 <div class="row">
     <div class="col-md-12">
         <table class="table table-striped">
-            <caption>Table Description</caption>
             <tr>
                 <th>Field</th>
                 <th>Type</th>
@@ -76,5 +75,4 @@ include template_path("top_menu.php");
         </table>        
     </div>
 </div>
-
 <?php include template_path("footer.php");?>

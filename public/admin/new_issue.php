@@ -6,10 +6,14 @@ include template_path("title.php");
 include template_path("top_menu.php");
 ?>
 <div class="row">
+    <div class="col-md-12">
+        <h2>New Issue</h2>
+    </div>
+</div>
+<div class="row">
     <div class="col-md-offset-2 col-md-6">
         <?php echo $session->message(); ?>
         <?php echo $session->errors(); ?>
-        <h2>Create a new issue.</h2>
         <form action="create_issue.php" method="post" class="form-horizontal">
             <?php echo csrf_token_tag(); ?>
             <input type="hidden" name="submitted_by" value="<?php echo h($session->user_id);?>">
@@ -33,5 +37,4 @@ include template_path("top_menu.php");
         </form>
     </div>
 </div>
-
 <?php include template_path("footer.php");?>

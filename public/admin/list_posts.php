@@ -1,5 +1,5 @@
 <?php require_once ("../../private/initialize.php");?>
-<?php if (!$session->is_logged_in()) {redirect_to("/admin/login.php"); } ?>
+<?php if (!$session->is_logged_in()) {redirect_to(WEB_ROOT."/admin/login.php"); } ?>
 <?php 
     // 1. the current page number ($current_page)
     $page = !empty($_GET['page'] ) ? (int)$_GET['page'] : 1;
@@ -36,16 +36,68 @@ include template_path("top_menu.php");
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
-<a href="<?php echo WEB_ROOT?>/admin/new_post.php" class="btn btn-primary">Create a new post</a>
+    <div class="col-md-6">
+        <a href="<?php echo WEB_ROOT?>/admin/new_post.php" class="btn btn-primary">Create a new post</a>
     </div>
+    <?php if ($pagination->total_pages() > 1) : ?>
+    <div class="col-md-6">
+        <nav id="pagination">
+            <ul class="pagination">
+            <?php 
+                if($pagination->has_rewind_page()) {
+                    echo "<li><a href =\"".WEB_ROOT."/admin/list_posts.php?page="
+                            .$pagination->rewind_page()
+                            ."\" aria-label=\"Previous\">&laquo;&laquo;</a></li>" ;
+                }
+                if($pagination->has_previous_page()) {
+                    echo "<li><a href =\"".WEB_ROOT."/admin/list_posts.php?page="
+                            .$pagination->previous_page()
+                            ."\" aria-label=\"Previous\">&laquo;</a></li>" ;
+                }
+                for($i= $pagination->start_page() ; $i <= $pagination->end_page(); $i++) {
+                    $output = "<li ";
+                    if($i == $page) {$output .= " class=\"active\"";}
+                    $output .= ">";
+                    if($i !== $page) {
+                        $output .= "<a href=\"".WEB_ROOT;
+                        $output .= "/admin/list_posts.php?page=".$i."\" ";
+                        $output .= ">{$i}</a>";
+                    } else {
+                        $output .= "<span>{$i}</span>";
+                    }
+                    $output .= "</li>";
+                    echo $output. PHP_EOL;
+                }
+
+                if($pagination->has_next_page()) {
+                    echo "<li><a href =\"".WEB_ROOT."/admin/list_posts.php?page="
+                            .$pagination->next_page()
+                            ."\">&raquo;</a></li> ".PHP_EOL ;
+
+                }
+                if($pagination->has_fast_forward_page()) {
+                    echo "<li><a href =\"".WEB_ROOT."/admin/list_posts.php?page="
+                            .$pagination->fast_forward_page()
+                            ."\">&raquo;&raquo;</a></li> ".PHP_EOL ;
+
+                }
+                if ($page > $pagination->total_pages()  ) {
+                    echo "<a href =".WEB_ROOT."/list_posts.php class=\"btn btn-default\">Back</a>";
+                } 
+            ?>
+            </ul>
+        </nav>
+    </div>
+<?php endif ?>
 </div>
-<br />
+
+<div class="row">
+    <div class="col-xs-12" style="height:50px;"></div>
+</div>
 
 <div class="row">
     <div class="col-md-12">
         <table class="table table-striped">
-            <caption>Posts</caption>
             <tr><th>Person</th>
                 <th>Date</th>
                 <th>Title</th>
@@ -71,46 +123,4 @@ include template_path("top_menu.php");
         </table>        
     </div>
 </div>
-<?php if ($pagination->total_pages() > 1) : ?>
-    <div class="row" style="border:1px solid red;">
-        <div class="col-md-12">
-            <nav id="pagination">
-                <ul class="pagination">
-                <?php 
-                    if($pagination->has_previous_page()) {
-                        echo "<li><a href =\"".WEB_ROOT."/admin/list_posts.php?page="
-                                .$pagination->previous_page()
-                                ."\" aria-label=\"Previous\">&laquo;</a></li>" ;
-                    }
-                    for($i=1; $i <= $pagination->total_pages(); $i++) {
-                        $output = "<li ";
-                        if($i == $page) {$output .= " class=\"active\"";}
-                        $output .= ">";
-                        if($i !== $page) {
-                            $output .= "<a href=\"".WEB_ROOT;
-                            $output .= "/admin/list_posts.php?page=".$i."\" ";
-                            $output .= ">{$i}</a>";
-                        } else {
-                            $output .= "<span>{$i}</span>";
-                        }
-                        $output .= "</li>";
-                        echo $output. PHP_EOL;
-                    }
-
-                    if($pagination->has_next_page()) {
-                        echo "<li><a href =\"".WEB_ROOT."/admin/list_posts.php?page="
-                                .$pagination->next_page()
-                                ."\">&raquo;</a></li> ".PHP_EOL ;
-
-                    }
-                    if ($page > $pagination->total_pages()  ) {
-                        echo "<a href =".WEB_ROOT."/list_posts.php class=\"btn btn-default\">Back</a>";
-                    } 
-                ?>
-                </ul>
-            </nav>
-        </div>
-    </div>
-<?php endif ?>
-
 <?php include template_path("footer.php");?>

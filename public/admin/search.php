@@ -28,7 +28,7 @@ if(request_is_post()) {
     $page = !empty($_GET['page'] ) ? (int)$_GET['page'] : 1;
 
     // 2. records per page ($per_page)
-    $per_page = 15;
+    $per_page = $config['perpage'];
             
     // 3. total record count ($total_count)
     $sql_where = "WHERE description like \"%" . $safe_description . "%\" ";
@@ -57,9 +57,6 @@ include template_path("top_menu.php");
  if (!empty($message)) {echo "<div class=\"message\">" . h($message) . "</div>";}
 ?>
 <?php if(isset($errors)) {echo form_errors($errors);}?>
-<p>To work on tomorrow.  Pagination works via links.  The search SQL only runs the first time.  It could work if the search criteria is either embedded into the url or if the search links are form submit buttons.
-    It will have to be a session variable in order to work properly via links.</p>
-<br>Also the posts form submits a value, which I changed to make it work for the search for.   Here is the code <pre>type="submit" name="submit" value="search"</pre>
 <?php include template_path("post_form.php"); ?>
 <br />
 
@@ -68,7 +65,6 @@ include template_path("top_menu.php");
 <?php
 if(request_is_post()) {
     $link_page = "search";
-    echo "{$sql_where}";
     include template_path("post_pagination.php");
 }
 ?>

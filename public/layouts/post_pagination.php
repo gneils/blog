@@ -33,7 +33,7 @@
     </div>
     <?php if ($pagination->total_pages() > 1) : ?>
         <div class="row" style="border:1px solid red;">
-            <div class="col-md-12">
+            <div class="col-md-4">
                 <nav id="pagination">
                     <ul class="pagination">
                     <?php 
@@ -42,7 +42,7 @@
                                     .$pagination->previous_page()
                                     ."\" aria-label=\"Previous\">&laquo;</a></li>" ;
                         }
-                        for($i=1; $i <= $pagination->total_pages(); $i++) {
+                        for($i= $page-3 ; $i <= $page + 3; $i++) {
                             $output = "<li ";
                             if($i == $page) {$output .= " class=\"active\"";}
                             $output .= ">";

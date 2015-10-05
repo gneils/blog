@@ -38,15 +38,15 @@ if (isset($_POST["submit"])) {
     // validations
     $required_fields = array("description");
     validate_presences($required_fields);
-    $fields_with_max_lengths = array("description" => 150);
+    $fields_with_max_lengths = array("description" => 900);
     validate_max_lengths($fields_with_max_lengths);
 
     $fields_with_min_lengths = array("description" => 2);
     validate_min_lengths($fields_with_min_lengths);
     
-    $valid_stats_options = ["Open","Closed"];
+    $status_whitelist = ["Open", "Closed"];
             
-    $result = has_inclusion_in(filter_input(INPUT_POST, "status" ), $valid_stats_options);
+    $result = has_inclusion_in(filter_input(INPUT_POST, "status" ), $status_whitelist);
     if (!$result) {
         $errors["Status"] = "Status is invalid.";
     }
@@ -89,7 +89,11 @@ include template_path("top_menu.php");
     if (!empty($message)) {echo "<div class=\"message\">" . h($message) . "</div>";}
 ?>
 <?php if(isset($errors)) {echo form_errors($errors);}?>
-
+<div class="row">
+    <div class="col-md-12">
+        <h2>Edit Issue</h2>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
             <form action="<?php echo WEB_ROOT?>/admin/edit_issue.php" method="post">
@@ -119,7 +123,4 @@ include template_path("top_menu.php");
         <br />
     </div>
 </div>
-<br />
-<br />
-
 <?php include template_path("footer.php"); ?>

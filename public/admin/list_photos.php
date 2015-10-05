@@ -22,11 +22,12 @@ include template_path("top_menu.php");
 <a href="<?php echo WEB_ROOT?>/admin/photo_upload.php" class="btn btn-primary">Upload a new photograph</a>
     </div>
 </div>
-<br />
+<div class="row">
+    <div class="col-xs-12" style="height:20px;"></div>
+</div>
 <div class="row">
     <div class="col-md-12">
         <table class="table table-striped">
-            <caption>List of Photos</caption>
             <tr><th>Image</th><th>Name</th><th>Caption</th><th>Type</th><th>size</th><th>Comments</th><th colspan="2">Action</th></tr>
             <?php foreach($photo_objects as $photo): ?>
                 <tr>

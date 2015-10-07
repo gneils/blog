@@ -4,25 +4,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Test Page</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 <style type="text/css">
+    @media only screen and (min-width:600px) {
+        body {
+            width: 600px;
+            margin: 0 auto;
+        }
+        p {font-size: 1em;}
+
+    }
+    @media only screen and (min-width:501px) and (max-width:599px) {
+        body {
+            width: 500px;
+            margin: 0 auto;
+        }
+        p {font-size: 2em;}
+    }
+    @media only screen and (max-width:500px) {
+        body {
+            width: 250px;
+            margin: 0 auto;
+        }
+        p {font-size: 3em;}
+    }
+    body {border: 1px solid red;}
 </style>
 </head>
 <body>
 
-<?php 
-$startdate = "2015-09-12 07:00:00";
-$enddate = "2015-09-14 16:00:00";
-$datetime1 = new DateTime($startdate);
-$datetime2 = new DateTime($enddate);
-$interval = $datetime1->diff($datetime2);
-$ptohours = $interval->format('%d %H');
-echo $ptohours;
-?>
-</div>
+    <p>Hello There</p>
 
 </body>
 </html>  

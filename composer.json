@@ -1,0 +1,16 @@
+{
+    "name": "geeves/blogger",
+    "description": "Blog for photos and people",
+    "license": "proprietary",
+    "type": "",
+    "require-dev": {
+        "phpunit/phpunit": "5.0.*"
+    },
+    "authors": [
+        {
+            "name": "Greg Neils",
+            "email": "gneils@hotmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}

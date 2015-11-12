@@ -35,7 +35,13 @@ include template_path("session_message.php");
 
 <div class="row">
     <div class="col-md-12">
-        <h2>Photographs</h2> 
+<?php  include template_path("carousel.php");?>      
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>One Random Photo</h2> 
     </div>
 </div>
 <div class="row">

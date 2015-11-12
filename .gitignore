@@ -59,13 +59,49 @@ Temporary Items
 ##########
 /uploads
 
-# Logs #
-########
+# Logs and databases #
+######################
 /private/logs
+*.log
+*.sql
+*.sqlite
+
 
 # Images #
 ##########
 /public/images
+*.bmp
+**/*.gif
+*.ico
+**/*.jpg
+*.jpeg
+*.svg
+*.spg
+*.png
+*.psd
+
+
+# Video #
+#########
+*.wmv
+*.mpg
+*.mpeg
+*.mp4
+*.mov
+*.flv
+*.avi
+*.ogv
+*.ogg
+*.webm
+
+# Audio #
+#########
+
+*.wav
+*.mp3
+*.wma
+
+
 
 # PHPMailer folder #
 ####################
@@ -73,8 +109,32 @@ Temporary Items
 
 *.sass-cache*
 
+# Fonts #
+##########
+/public/fonts
+*.eot
+*.ttf
+*.woff
 
 
-
-
+# Vendor Files #
+##########
 /vendor/
+
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Text File Auto Backups#
+#########################
+*.bak

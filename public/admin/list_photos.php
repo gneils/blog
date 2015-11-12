@@ -33,7 +33,7 @@ include template_path("top_menu.php");
                 <tr>
                     <td>
                         <a href="<?php echo WEB_ROOT?>/admin/edit_photo.php?pid=<?php echo $photo->id?>">
-                            <img src="<?php echo WEB_ROOT."/".h($photo->image_path()); ?>" width="100" alt="<?php echo $photo->filename; ?>"/>
+                            <img src="<?php echo WEB_ROOT."/".h($photo->image_path()); ?>" width="100%" alt="<?php echo $photo->filename; ?>"/>
                         </a>
                     </td>
                 <td><?php echo $photo->filename; ?></td>

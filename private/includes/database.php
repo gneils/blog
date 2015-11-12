@@ -31,7 +31,7 @@ class MySQLDatabase {
     
     public function query($sql) {
         $result = mysqli_query($this->connection, $sql);
-        $this->confirm_query($result, $sql);       
+        $this->confirm_query($result, $sql);   
         return $result;
     }
     

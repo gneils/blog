@@ -22,6 +22,16 @@ include template_path("top_menu.php");
                 <textarea name="description" id="description"  class="form-control" rows="5"></textarea>
             </div>
             <div class="form-group">
+                <label for="priority">Priority</label>
+                <select name="priority" id="status" class="form-control"> 
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="status">Status</label>
                 <select name="status" id="status" class="form-control"> 
                     <option value="Open">Open</option>

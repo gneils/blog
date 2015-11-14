@@ -35,7 +35,7 @@ include template_path("session_message.php");
 
 <div class="row">
     <div class="col-md-12">
-<?php  include template_path("carousel.php");?>      
+        <?php  include template_path("carousel.php");?>      
     </div>
 </div>
 

@@ -86,6 +86,7 @@
               <ul class="dropdown-menu" aria-labelledby="drop2">
                 <li><a href="<?php echo WEB_ROOT?>/admin/photo_upload.php">New Photo</a></li>
                 <li><a href="<?php echo WEB_ROOT?>/admin/list_photos.php">List Photos</a></li>
+                <li><a href="<?php echo WEB_ROOT?>/admin/photo_grid.php">Random Photo Grid</a></li>
                 <li role="separator" class="divider"></li>
                 <?php foreach($photo_menus as $photo_menu): ?>
                    <li><a href="<?php echo WEB_ROOT?>/admin/edit_photo.php?pid=<?php echo $photo_menu->id?>" >
@@ -117,6 +118,7 @@
                         echo "<li><a href=\"".WEB_ROOT."/admin/list_issues.php\">Issues</a></li>";
                         echo "<li><a href=\"".WEB_ROOT."/admin/list_table_checksums.php\">Table Checksums</a></li>";
                         echo "<li><a href=\"".WEB_ROOT."/admin/sandbox.php\">Sandbox</a></li>";
+                        echo "<li><a href=\"".WEB_ROOT."/admin/modal_sample.php\">Sample Modal</a></li>";
                         echo "<li role=\"separator\" class=\"divider\"></li>";
                         echo "<li><a href=\"".WEB_ROOT."/admin/logout.php\">Log Out</a></li>";
                     } else {

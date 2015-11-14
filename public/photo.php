@@ -51,7 +51,8 @@ include template_path("top_menu.php");
 <div class="row">
     <div class="col-md-offset-3 col-md-6 ">
         <div class="drop-shadow perspective">
-            <img src="<?php echo WEB_ROOT."/".h($photo->image_path()); ?>" class="img-responsive" alt="<?php echo $photo->filename; ?>"/>
+            <img src="<?php echo WEB_ROOT."/".h($photo->image_path()); ?>" 
+                 class="img-responsive" alt="<?php echo $photo->filename; ?>"/>
             <h2 class="text-center"><?php echo $photo->caption; ?></h2> 
         </div>
     </div>

@@ -17,6 +17,10 @@ if (isset($_POST["submit"])) {
    
     $fields_with_min_lengths = array("description" => 5,); 
     validate_min_lengths($fields_with_min_lengths);
+    $priority = s(filter_input(INPUT_POST, "priority" ) )  ;
+    if( !has_number( $priority, ['min' => 1, 'max' => 5] ) ){
+        $errors["Priority"] = "Priority is invalid.";        
+    }
 
     if(!empty($errors)){
         $_SESSION["errors"] = $errors;
@@ -25,10 +29,12 @@ if (isset($_POST["submit"])) {
     
     $query  = "INSERT INTO issues (";
     $query .= " description,";
+    $query .= " priority,";
     $query .= " curr_status,";
     $query .= " resolution";
     $query .= ") VALUES (";
     $query .= " '{$description}', ";
+    $query .= " {$priority}, ";
     $query .= " '{$curr_status}', ";
     $query .= " '{$resolution}'";
     $query .= ")";

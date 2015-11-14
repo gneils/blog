@@ -8,20 +8,22 @@ class Issue extends DatabaseObject {
     
     protected static $table_name = "issues";
     protected static $db_fields = array('id', 
+                                        'description', 
+                                        'priority', 
                                         'created', 
                                         'updated',
-                                        'description', 
-                                        'submitted_by',
                                         'curr_status',
                                         'resolution',
+                                        'submitted_by',
                                         );
     public $id;
+    public $description;
+    public $priority;
     public $created;
     public $updated;
-    public $description;
-    public $submitted_by;
     public $curr_status;
     public $resolution;
+    public $submitted_by;
     
     // "new" is a keyword so you can't use it here 
     public static function make($id, 

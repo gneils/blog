@@ -42,13 +42,20 @@ if (isset($_POST["submit"])) {
         $safe_caption = $database->escape_value(s(filter_input(INPUT_POST, "caption" ) ) );
         $safe_description = $database->escape_value(s(filter_input(INPUT_POST, "description" ) ) );
         $photo_date = s(filter_input(INPUT_POST, "photo_date"));
-        $sqlDate = date('Y-m-d', strtotime($photo_date));    
+        
+        if(empty($photo_date)) {
+            $sqlDate  = NULL;     
+        } else {
+            list($y,$m,$d) = explode("-", $photo_date);
+            $timestamp = mktime(0,0,0,$m,$d,$y);
+            $sqlDate  = date("Y-m-d",$timestamp);          
+        }
 
         $query  = "UPDATE photographs SET ";
         $query .= "caption = '{$safe_caption}', ";
         $query .= "description = '{$safe_description}', ";
-        $query .= "photo_date = '{$sqlDate}' ";
-        $query .= "WHERE id = {$safe_id} ";
+        $query .= "photo_date = ". ($sqlDate==NULL ? "NULL" : "'$sqlDate'") ;
+        $query .= " WHERE id = {$safe_id} ";
         $query .= "LIMIT 1";
 
         //$result = mysqli_query($connection, $query);
@@ -78,10 +85,22 @@ include template_path("top_menu.php");
 ?>
 <?php if(isset($errors)) {echo form_errors($errors);}?>
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+      <div class="modal-body">
+          <img id="modalimage" src="" alt="Modal Photo" width="100%">
+      </div>
+  </div>
+</div>
+
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <div class ="text-center">
+            <div id="photo-grid" class="modalphotos photogrid clearfix">
+
         <img src="<?php echo WEB_ROOT."/".h($photo->image_path()); ?>" width="320" alt="<?php echo h($photo->filename); ?>"/>
+            </div>
         </div>
         <form action="<?php echo WEB_ROOT?>/admin/edit_photo.php" method="post">
             <?php echo csrf_token_tag(); ?>

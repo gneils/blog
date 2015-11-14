@@ -11,5 +11,4 @@
         <link href="<?php echo WEB_ROOT?>/css/bootstrap.min.css" media="all" rel="stylesheet" type="text/css" />
         <link href="<?php echo WEB_ROOT?>/css/main.css" media="all" rel="stylesheet" type="text/css" />
         <link href="<?php echo WEB_ROOT?>/css/photos.css" media="all" rel="stylesheet" type="text/css" />
-        <script src="<?php echo WEB_ROOT?>/js/global.js"></script>
     </head>

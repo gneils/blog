@@ -44,11 +44,14 @@ if (isset($_POST["submit"])) {
     $fields_with_min_lengths = array("description" => 2);
     validate_min_lengths($fields_with_min_lengths);
     
-    $status_whitelist = ["Open", "Closed"];
-            
+    $status_whitelist = ["Open", "Closed"];           
     $result = has_inclusion_in(filter_input(INPUT_POST, "status" ), $status_whitelist);
     if (!$result) {
         $errors["Status"] = "Status is invalid.";
+    }
+    $priority = s(filter_input(INPUT_POST, "priority" ) )  ;
+    if( !has_number( $priority, ['min' => 1, 'max' => 5] ) ){
+        $errors["Priority"] = "Priority is invalid.";        
     }
     
     if(empty($errors)){
@@ -57,8 +60,10 @@ if (isset($_POST["submit"])) {
         $safe_description = $database->escape_value(s(filter_input(INPUT_POST, "description" )) ) ;
         $safe_status = $database->escape_value(s(filter_input(INPUT_POST, "status" ) ) ) ;
         $safe_resolution = $database->escape_value(s(filter_input(INPUT_POST, "resolution" ) ) ) ;
+        $safe_priority = $database->escape_value($priority ) ;
         $query  = "UPDATE issues SET ";
         $query .= "description = '{$safe_description}', ";
+        $query .= "priority = '{$safe_priority}', ";
         $query .= "curr_status = '{$safe_status}', ";
         $query .= "resolution = '{$safe_resolution}' ";
         $query .= "WHERE id = {$safe_id} ";
@@ -108,6 +113,16 @@ include template_path("top_menu.php");
                 <select name="status" id="status" class="form-control"> 
                     <option value="Open" <?php if($current_issue->curr_status == "Open") {echo "selected";}?>>Open</option>
                     <option value="Closed" <?php if($current_issue->curr_status == "Closed") {echo "selected";}?>>Closed</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="priority">Priority</label>
+                <select name="priority" id="status" class="form-control"> 
+                    <option value="1" <?php if($current_issue->priority == 1) {echo "selected";}?>>1</option>
+                    <option value="2" <?php if($current_issue->priority == 2) {echo "selected";}?>>2</option>
+                    <option value="3" <?php if($current_issue->priority == 3) {echo "selected";}?>>3</option>
+                    <option value="4" <?php if($current_issue->priority == 4) {echo "selected";}?>>4</option>
+                    <option value="5" <?php if($current_issue->priority == 5) {echo "selected";}?>>5</option>
                 </select>
             </div>
             <div class="form-group">
